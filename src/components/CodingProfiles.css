@@ -1,0 +1,121 @@
+.profiles-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-top: 20px;
+}
+
+.profile-card {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px !important;
+}
+
+/* Override GlassCard border color on hover dynamically using our custom brand variable */
+.profile-card:hover .glass-card-border {
+  border-color: var(--brand-color) !important;
+}
+
+/* Background brand glow */
+.profile-card-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+  z-index: 1;
+}
+
+.profile-card:hover .profile-card-glow {
+  opacity: 1;
+}
+
+.profile-logo-box {
+  margin-bottom: 20px;
+  transition: transform var(--transition-normal);
+  z-index: 2;
+}
+
+.profile-card:hover .profile-logo-box {
+  transform: scale(1.1) translateY(-4px);
+}
+
+.profile-name {
+  font-family: var(--font-headings);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+  z-index: 2;
+}
+
+.profile-username {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+  z-index: 2;
+}
+
+.profile-btn-wrapper {
+  z-index: 2;
+  width: 100%;
+}
+
+.profile-visit-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  font-family: var(--font-headings);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 8px 20px;
+  border-radius: var(--border-radius-full);
+  border: 1px solid var(--glass-border);
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.02);
+  transition: all var(--transition-fast);
+}
+
+.profile-visit-btn:hover {
+  background: var(--brand-color);
+  color: #FFFFFF !important;
+  border-color: var(--brand-color);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), 0 0 15px var(--brand-color);
+}
+
+/* Arrow transition */
+.visit-arrow-icon {
+  font-size: 0.75rem;
+  transition: transform var(--transition-fast);
+}
+
+.profile-visit-btn:hover .visit-arrow-icon {
+  transform: translateX(4px);
+}
+
+/* Responsive configurations */
+@media (max-width: 992px) {
+  .profiles-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .profiles-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .profile-card {
+    padding: 30px 20px !important;
+  }
+}

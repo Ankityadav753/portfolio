@@ -1,0 +1,215 @@
+.experience-timeline {
+  position: relative;
+  max-width: 1000px;
+  margin: 40px auto 0 auto;
+  padding: 20px 0;
+}
+
+/* Timeline central line */
+.exp-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  background: linear-gradient(180deg, 
+    var(--accent-1) 0%, 
+    var(--accent-2) 50%, 
+    transparent 100%
+  );
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+/* Individual timeline item container */
+.exp-item {
+  position: relative;
+  display: flex;
+  margin-bottom: 50px;
+  width: 100%;
+}
+
+.exp-item:last-child {
+  margin-bottom: 0;
+}
+
+.exp-content-box {
+  position: relative;
+  width: 50%;
+  z-index: 2;
+}
+
+/* Left Align specific styles */
+.exp-item.left-align {
+  justify-content: flex-start;
+}
+
+.exp-item.left-align .exp-content-box {
+  padding-right: 45px;
+}
+
+/* Right Align specific styles */
+.exp-item.right-align {
+  justify-content: flex-end;
+}
+
+.exp-item.right-align .exp-content-box {
+  padding-left: 45px;
+}
+
+/* Central circular marker */
+.exp-marker {
+  position: absolute;
+  left: 50%;
+  top: 24px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--bg-secondary);
+  border: 2px solid var(--accent-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-3);
+  font-size: 1rem;
+  transform: translateX(-50%);
+  box-shadow: 0 0 15px rgba(139, 92, 246, 0.4);
+  z-index: 3;
+}
+
+.exp-card {
+  padding: 28px !important;
+}
+
+/* Card Inner details */
+.exp-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.exp-duration {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--accent-3);
+  font-family: var(--font-headings);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.duration-icon {
+  font-size: 0.85rem;
+}
+
+.exp-company-tag {
+  font-family: var(--font-headings);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--glass-border);
+  padding: 4px 12px;
+  border-radius: var(--border-radius-full);
+}
+
+.exp-role {
+  font-family: var(--font-headings);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+}
+
+.exp-bullets {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.exp-bullet-item {
+  position: relative;
+  padding-left: 20px;
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.exp-bullet-item::before {
+  content: '▹';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--accent-2);
+  font-weight: bold;
+}
+
+/* Tech List inside card */
+.exp-tech {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 16px;
+}
+
+.exp-tech-title {
+  font-family: var(--font-headings);
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  letter-spacing: 0.05em;
+}
+
+.exp-tech-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.exp-tech-tag {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.04);
+  padding: 3px 10px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Responsive configurations */
+@media (max-width: 800px) {
+  .exp-line {
+    left: 20px;
+    transform: none;
+  }
+
+  .exp-item {
+    flex-direction: column;
+    margin-bottom: 40px;
+  }
+
+  .exp-content-box {
+    width: 100%;
+  }
+
+  .exp-item.left-align .exp-content-box {
+    padding-right: 0;
+    padding-left: 50px;
+  }
+
+  .exp-item.right-align .exp-content-box {
+    padding-left: 50px;
+  }
+
+  .exp-marker {
+    left: 20px;
+    transform: translateX(-50%);
+  }
+}

@@ -1,0 +1,221 @@
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+  align-items: stretch;
+}
+
+.project-card {
+  padding: 0 !important; /* Flush image layout */
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Image Banner Window */
+.project-image-box {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.project-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-card:hover .project-image {
+  transform: scale(1.06);
+}
+
+.project-image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(11, 17, 32, 0.6) 100%);
+  pointer-events: none;
+}
+
+/* Card Body */
+.project-body {
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+/* Tech Badges */
+.project-tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.tech-tag {
+  font-family: var(--font-headings);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--accent-3);
+  background: rgba(6, 182, 212, 0.08);
+  border: 1px solid rgba(6, 182, 212, 0.2);
+  padding: 4px 10px;
+  border-radius: var(--border-radius-full);
+}
+
+.project-card-title {
+  font-family: var(--font-headings);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.project-subtitle {
+  font-size: 0.9rem;
+  color: var(--accent-2);
+  font-family: var(--font-headings);
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+
+.project-desc {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+
+/* Features Checklist */
+.project-features {
+  margin-bottom: 30px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  padding: 18px;
+  border-radius: var(--border-radius-md);
+}
+
+.features-header {
+  font-family: var(--font-headings);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+  letter-spacing: 0.05em;
+}
+
+.features-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.feature-check {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: rgba(139, 92, 246, 0.2);
+  color: var(--accent-2);
+  font-size: 0.6rem;
+  margin-top: 4px;
+  flex-shrink: 0;
+}
+
+.feature-text {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* Links at bottom of card */
+.project-links {
+  display: flex;
+  gap: 16px;
+  margin-top: auto;
+}
+
+.project-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-headings);
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 10px 22px;
+  border-radius: var(--border-radius-full);
+  transition: all var(--transition-fast);
+}
+
+.btn-code {
+  border: 1px solid var(--glass-border);
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.btn-code:hover {
+  border-color: var(--accent-2);
+  background: rgba(139, 92, 246, 0.05);
+}
+
+.btn-demo {
+  background: var(--gradient-2);
+  color: var(--text-primary);
+  box-shadow: var(--glow-accent-3);
+}
+
+.btn-demo:hover {
+  box-shadow: 0 0 25px rgba(6, 182, 212, 0.4);
+}
+
+.project-btn-icon {
+  font-size: 1rem;
+}
+
+.project-btn-icon.small {
+  font-size: 0.8rem;
+}
+
+/* Responsive configurations */
+@media (max-width: 900px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+}
+
+@media (max-width: 576px) {
+  .project-body {
+    padding: 20px;
+  }
+  
+  .project-links {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .project-links .magnetic-button-wrapper {
+    width: 100%;
+  }
+
+  .project-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
