@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { FaMapMarkerAlt, FaEnvelope, FaPhoneAlt, FaGithub, FaLinkedin, FaPaperPlane } from 'react-icons/fa';
-import { SiLeetcode } from 'react-icons/si';
+import { MapMarker, Envelope, Github, Linkedin, PaperPlane, Check } from './ui/Icons';
 import { portfolioData } from '../data/portfolioData';
 import { GlassCard } from './ui/GlassCard';
 import { MagneticButton } from './ui/MagneticButton';
+import { ScrollReveal } from './ui/ScrollReveal';
 import './Contact.css';
 
 export const Contact = () => {
-  const { email, phone, location, socials } = portfolioData.personalInfo;
+  const { email, location, socials } = portfolioData.personalInfo;
   
   const [formData, setFormData] = useState({
     name: '',
@@ -16,216 +15,219 @@ export const Contact = () => {
     subject: '',
     message: ''
   });
-  
-  const [status, setStatus] = useState({
-    submitting: false,
-    success: false,
-    error: null
-  });
+
+  const [copied, setCopied] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText(email).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2500);
+    }).catch(() => {
+      // Fallback
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2500);
+    });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    setStatus({ submitting: true, success: false, error: null });
-
-    // Simulate API request
-    setTimeout(() => {
-      setStatus({ submitting: false, success: true, error: null });
-      setFormData({ name: '', email: '', subject: '', message: '' });
-    }, 1500);
+    
+    // Construct genuine mailto action (no fake server illusions)
+    const subjectLine = formData.subject.trim() || `Portfolio Inquiry from ${formData.name.trim() || 'Recruiter'}`;
+    const bodyText = `Hi Ankit,\n\n${formData.message.trim()}\n\nBest regards,\n${formData.name.trim()}\nContact Email: ${formData.email.trim()}`;
+    
+    const mailtoUrl = `mailto:${email}?subject=${encodeURIComponent(subjectLine)}&body=${encodeURIComponent(bodyText)}`;
+    
+    // Open genuine email client
+    window.location.href = mailtoUrl;
   };
 
   return (
-    <section id="contact" className="contact-section section">
+    <section id="contact" className="contact-section section" aria-label="Contact Ankit Kumar">
       <div className="contact-container container">
-        <h2 className="section-subtitle">Get In Touch</h2>
-        <h3 className="section-title">Contact <span>Me</span></h3>
+        
+        <p className="section-subtitle">Get In Touch</p>
+        <h2 className="section-title">Contact <span>Me</span></h2>
 
         <div className="contact-grid">
-          {/* Left Side: Modern Glass Form */}
-          <motion.div 
+          {/* Left Side: Genuine Mailto Contact Form */}
+          <ScrollReveal 
             className="contact-form-box"
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            direction="left"
           >
             <GlassCard className="form-card" hoverLift={false} hoverGlow={true}>
-              <AnimatePresence mode="wait">
-                {!status.success ? (
-                  <motion.form 
-                    key="contact-form"
-                    onSubmit={handleSubmit} 
-                    className="contact-form"
-                    initial={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
+              <div className="form-header">
+                <h3 className="form-title">Send a Direct Message</h3>
+                <p className="form-note">
+                  Submitting will draft an email directly to <strong>{email}</strong> via your default email application.
+                </p>
+              </div>
+
+              <form 
+                onSubmit={handleSubmit} 
+                className="contact-form"
+              >
+                <div className="form-group-row">
+                  <div className="form-group">
+                    <label htmlFor="name">Your Name</label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      placeholder="e.g. John Doe"
+                      required
+                    />
+                  </div>
+                  
+                  <div className="form-group">
+                    <label htmlFor="email">Your Email</label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      placeholder="e.g. recruiter@company.com"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="subject">Subject</label>
+                  <input
+                    type="text"
+                    id="subject"
+                    name="subject"
+                    value={formData.subject}
+                    onChange={handleChange}
+                    placeholder="e.g. Software Engineering Opportunity"
+                    required
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="message">Message</label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    placeholder="Write your message here..."
+                    rows="5"
+                    required
+                  />
+                </div>
+
+                <MagneticButton className="submit-btn-wrapper">
+                  <button 
+                    type="submit" 
+                    className="btn-submit"
+                    aria-label="Open email client to send message"
                   >
-                    <div className="form-group-row">
-                      <div className="form-group">
-                        <label htmlFor="name">Name</label>
-                        <input
-                          type="text"
-                          id="name"
-                          name="name"
-                          value={formData.name}
-                          onChange={handleChange}
-                          placeholder="Your Name"
-                          required
-                        />
-                      </div>
-                      
-                      <div className="form-group">
-                        <label htmlFor="email">Email</label>
-                        <input
-                          type="email"
-                          id="email"
-                          name="email"
-                          value={formData.email}
-                          onChange={handleChange}
-                          placeholder="Your Email"
-                          required
-                        />
-                      </div>
-                    </div>
-
-                    <div className="form-group">
-                      <label htmlFor="subject">Subject</label>
-                      <input
-                        type="text"
-                        id="subject"
-                        name="subject"
-                        value={formData.subject}
-                        onChange={handleChange}
-                        placeholder="Subject Topic"
-                        required
-                      />
-                    </div>
-
-                    <div className="form-group">
-                      <label htmlFor="message">Message</label>
-                      <textarea
-                        id="message"
-                        name="message"
-                        value={formData.message}
-                        onChange={handleChange}
-                        placeholder="Your Message..."
-                        rows="5"
-                        required
-                      />
-                    </div>
-
-                    <MagneticButton className="submit-btn-wrapper">
-                      <button 
-                        type="submit" 
-                        className="btn-submit"
-                        disabled={status.submitting}
-                      >
-                        {status.submitting ? (
-                          <span className="spinner" />
-                        ) : (
-                          <>
-                            <span>Send Message</span>
-                            <FaPaperPlane className="submit-icon" />
-                          </>
-                        )}
-                      </button>
-                    </MagneticButton>
-                  </motion.form>
-                ) : (
-                  <motion.div 
-                    key="success-banner"
-                    className="form-success-banner"
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                  >
-                    <div className="success-icon-box">🎉</div>
-                    <h4 className="success-title">Message Sent!</h4>
-                    <p className="success-text">
-                      Thank you for reaching out. Ankit will get back to you as soon as possible.
-                    </p>
-                    <button 
-                      onClick={() => setStatus({ submitting: false, success: false, error: null })} 
-                      className="btn-reset"
-                    >
-                      Send Another Message
-                    </button>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                    <span>Compose Email</span>
+                    <PaperPlane className="submit-icon" style={{ width: '1rem', height: '1rem' }} />
+                  </button>
+                </MagneticButton>
+              </form>
             </GlassCard>
-          </motion.div>
+          </ScrollReveal>
 
-          {/* Right Side: Contact Info */}
-          <motion.div 
+          {/* Right Side: Contact Info & Socials */}
+          <ScrollReveal 
             className="contact-info-box"
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            direction="right"
           >
-            {/* Info Cards */}
             <div className="info-cards-list">
+              {/* Email Card */}
               <GlassCard className="info-card" hoverLift={true} hoverGlow={true}>
-                <div className="info-card-icon-box blue-glow">
-                  <FaMapMarkerAlt />
+                <div className="info-card-icon-box info-glow-amber">
+                  <Envelope style={{ width: '1.2rem', height: '1.2rem' }} />
                 </div>
                 <div className="info-card-text">
-                  <h5>Location</h5>
+                  <h4>Email</h4>
+                  <a href={`mailto:${email}`} className="info-link" aria-label={`Email ${email}`}>
+                    {email}
+                  </a>
+                  <button 
+                    type="button" 
+                    onClick={handleCopyEmail} 
+                    className="copy-email-btn"
+                    aria-label="Copy email address to clipboard"
+                  >
+                    {copied ? (
+                      <span className="copied-status">
+                        <Check style={{ width: '0.8rem', height: '0.8rem' }} /> Copied!
+                      </span>
+                    ) : (
+                      <span>Copy Address</span>
+                    )}
+                  </button>
+                </div>
+              </GlassCard>
+
+              {/* Location Card */}
+              <GlassCard className="info-card" hoverLift={true} hoverGlow={true}>
+                <div className="info-card-icon-box info-glow-terracotta">
+                  <MapMarker style={{ width: '1.2rem', height: '1.2rem' }} />
+                </div>
+                <div className="info-card-text">
+                  <h4>Location</h4>
                   <p>{location}</p>
                 </div>
               </GlassCard>
-
-              <GlassCard className="info-card" hoverLift={true} hoverGlow={true}>
-                <div className="info-card-icon-box purple-glow">
-                  <FaEnvelope />
-                </div>
-                <div className="info-card-text">
-                  <h5>Email</h5>
-                  <p><a href={`mailto:${email}`}>{email}</a></p>
-                </div>
-              </GlassCard>
-
-              <GlassCard className="info-card" hoverLift={true} hoverGlow={true}>
-                <div className="info-card-icon-box cyan-glow">
-                  <FaPhoneAlt />
-                </div>
-                <div className="info-card-text">
-                  <h5>Phone</h5>
-                  <p>{phone}</p>
-                </div>
-              </GlassCard>
             </div>
 
-            {/* Social Block */}
+            {/* Social Connect Block */}
             <div className="info-social-block">
-              <h4>Connect with me on Socials</h4>
-              <div className="contact-social-icons">
-                <MagneticButton>
-                  <a href={socials.github} target="_blank" rel="noreferrer" aria-label="GitHub">
-                    <FaGithub />
-                  </a>
-                </MagneticButton>
-                <MagneticButton>
-                  <a href={socials.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn">
-                    <FaLinkedin />
-                  </a>
-                </MagneticButton>
-                <MagneticButton>
-                  <a href={socials.leetcode} target="_blank" rel="noreferrer" aria-label="LeetCode">
-                    <SiLeetcode />
-                  </a>
-                </MagneticButton>
+              <h4 className="social-block-title">Professional Profiles</h4>
+              <p className="social-block-desc">
+                Connect with me on GitHub to view my repositories or reach out via LinkedIn.
+              </p>
+
+              <div className="contact-social-buttons">
+                <a 
+                  href={socials.github} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="social-card-btn"
+                  aria-label="Visit Ankit's GitHub Profile"
+                >
+                  <Github className="social-card-icon" />
+                  <div>
+                    <span className="social-platform-name">GitHub</span>
+                    <span className="social-handle">@Ankityadav753</span>
+                  </div>
+                </a>
+
+                <a 
+                  href={socials.linkedin} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="social-card-btn"
+                  aria-label="Visit Ankit's LinkedIn Profile"
+                >
+                  <Linkedin className="social-card-icon" />
+                  <div>
+                    <span className="social-platform-name">LinkedIn</span>
+                    <span className="social-handle">Ankit Kumar</span>
+                  </div>
+                </a>
               </div>
             </div>
-          </motion.div>
+          </ScrollReveal>
+
         </div>
       </div>
     </section>
   );
 };
+
 export default Contact;

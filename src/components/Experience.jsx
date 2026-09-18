@@ -1,70 +1,71 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import { FaBriefcase, FaRegCalendarAlt } from 'react-icons/fa';
+import { Briefcase, Calendar as CalendarIcon, MapMarker } from './ui/Icons';
 import { portfolioData } from '../data/portfolioData';
 import { GlassCard } from './ui/GlassCard';
+import { ScrollReveal } from './ui/ScrollReveal';
 import './Experience.css';
 
 export const Experience = () => {
   const experiences = portfolioData.experience;
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2
-      }
-    }
-  };
-
   return (
-    <section id="experience" className="experience-section section">
+    <section id="experience" className="experience-section section" aria-label="Work Experience">
       <div className="experience-container container">
-        <h2 className="section-subtitle">Career Path</h2>
-        <h3 className="section-title">Work <span>Experience</span></h3>
+        
+        <p className="section-subtitle">Career Path</p>
+        <h2 className="section-title">Work <span>Experience</span></h2>
 
-        <motion.div 
-          className="experience-timeline"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-60px' }}
-        >
+        <div className="experience-timeline">
           {/* Vertical central divider line */}
           <div className="exp-line" />
 
           {experiences.map((exp, idx) => {
             const isEven = idx % 2 === 0;
             return (
-              <motion.div 
+              <ScrollReveal 
                 key={idx} 
                 className={`exp-item ${isEven ? 'left-align' : 'right-align'}`}
-                initial={{ opacity: 0, y: 40, x: isEven ? -40 : 40 }}
-                whileInView={{ opacity: 1, y: 0, x: 0 }}
-                viewport={{ once: true, margin: '-80px' }}
-                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                direction={isEven ? 'left' : 'right'}
+                delay={idx * 0.12}
               >
-                {/* Visual marker in center of line */}
-                <div className="exp-marker">
-                  <FaBriefcase />
+                {/* Visual marker */}
+                <div className="exp-marker" aria-hidden="true">
+                  <Briefcase style={{ width: '1.1rem', height: '1.1rem' }} />
                 </div>
 
                 {/* Glass Card content */}
                 <div className="exp-content-box">
                   <GlassCard className="exp-card" hoverLift={true} hoverGlow={true}>
-                    {/* Header: Date Duration */}
+                    {/* Header: Company & Duration */}
                     <div className="exp-card-header">
-                      <div className="exp-duration">
-                        <FaRegCalendarAlt className="duration-icon" />
-                        <span>{exp.duration}</span>
+                      <div>
+                        <h3 className="exp-role">{exp.role}</h3>
+                        <h4 className="exp-company-name">{exp.company}</h4>
                       </div>
-                      <span className="exp-company-tag">{exp.company}</span>
+
+                      <div className="exp-meta-tags">
+                        {exp.duration && (
+                          <div className="exp-duration">
+                            <CalendarIcon style={{ width: '0.85rem', height: '0.85rem' }} />
+                            <span>{exp.duration}</span>
+                          </div>
+                        )}
+                        {exp.location && (
+                          <div className="exp-location">
+                            <MapMarker style={{ width: '0.85rem', height: '0.85rem' }} />
+                            <span>{exp.location}</span>
+                          </div>
+                        )}
+                      </div>
                     </div>
 
-                    <h4 className="exp-role">{exp.role}</h4>
-                    
-                    {/* Responsibilities */}
+                    {exp.project && (
+                      <div className="exp-project-pill">
+                        <span>Project:</span> <strong>{exp.project}</strong>
+                      </div>
+                    )}
+
+                    {/* Responsibilities list */}
                     <ul className="exp-bullets">
                       {exp.responsibilities.map((resp, respIdx) => (
                         <li key={respIdx} className="exp-bullet-item">
@@ -73,9 +74,9 @@ export const Experience = () => {
                       ))}
                     </ul>
 
-                    {/* Utilized tech stacks */}
+                    {/* Technologies list */}
                     <div className="exp-tech">
-                      <span className="exp-tech-title">Tech:</span>
+                      <span className="exp-tech-title">Technologies:</span>
                       <div className="exp-tech-list">
                         {exp.technologies.map((tech, techIdx) => (
                           <span key={techIdx} className="exp-tech-tag">
@@ -86,12 +87,13 @@ export const Experience = () => {
                     </div>
                   </GlassCard>
                 </div>
-              </motion.div>
+              </ScrollReveal>
             );
           })}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
 };
+
 export default Experience;

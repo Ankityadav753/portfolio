@@ -1,146 +1,100 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import { FaGraduationCap, FaAward, FaLaptopCode, FaRegSmile } from 'react-icons/fa';
+import { GraduationCap, Briefcase, LaptopCode, Brain, ExternalLink } from './ui/Icons';
 import { portfolioData } from '../data/portfolioData';
 import { GlassCard } from './ui/GlassCard';
+import { ScrollReveal } from './ui/ScrollReveal';
 import './About.css';
 
 export const About = () => {
-  const { name, description } = portfolioData.personalInfo;
-  const education = portfolioData.education[0];
+  const { resumeUrl } = portfolioData.personalInfo;
+  const highlights = portfolioData.aboutHighlights;
 
-  const stats = [
-    {
-      icon: <FaLaptopCode className="stat-icon icon-blue" />,
-      title: "Experience",
-      value: "Frontend Developer",
-      desc: "Dream Blend Solutions"
-    },
-    {
-      icon: <FaAward className="stat-icon icon-purple" />,
-      title: "B.Tech CGPA",
-      value: "8.38",
-      desc: "MMMUT Gorakhpur"
-    },
-    {
-      icon: <FaGraduationCap className="stat-icon icon-cyan" />,
-      title: "DSA Solved",
-      value: "500+",
-      desc: "LeetCode & Codeforces"
-    },
-    {
-      icon: <FaRegSmile className="stat-icon icon-pink" />,
-      title: "Projects",
-      value: "12+",
-      desc: "Completed & Deployed"
-    }
+  const highlightIcons = [
+    <GraduationCap key="edu" className="highlight-icon icon-accent-highlight" />,
+    <Briefcase key="exp" className="highlight-icon icon-accent-primary" />,
+    <LaptopCode key="web" className="highlight-icon icon-accent-secondary" />,
+    <Brain key="dsa" className="highlight-icon icon-accent-highlight" />
   ];
 
   return (
-    <section id="about" className="about-section section">
+    <section id="about" className="about-section section" aria-label="About Me">
       <div className="about-container container">
         
-        <h2 className="section-subtitle">Introduction</h2>
-        <h3 className="section-title">About <span>Me</span></h3>
+        <p className="section-subtitle">Background</p>
+        <h2 className="section-title">About <span>Me</span></h2>
 
         <div className="about-grid">
-          {/* Left Side: Portrait Graphic */}
-          <motion.div 
-            className="about-graphic-container"
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: '-100px' }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <div className="portrait-wrapper">
-              <div className="portrait-glow" />
-              <img 
-                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=800" 
-                alt="Ankit Kumar Profile" 
-                className="portrait-img"
-              />
-              <div className="portrait-overlay" />
-            </div>
-            
-            {/* Abstract floating circles */}
-            <div className="about-shape shape-1" />
-            <div className="about-shape shape-2" />
-          </motion.div>
+          {/* Portrait Image / Personal Photo */}
+          <div className="about-graphic-container">
+            <ScrollReveal direction="left" className="portrait-scroll-reveal">
+              <div className="portrait-wrapper">
+                <img 
+                  src="/profile.jpg" 
+                  alt="Ankit Kumar - Software Engineer"
+                  className="portrait-img"
+                  loading="lazy"
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=600";
+                  }}
+                />
+                <div className="portrait-overlay" />
+              </div>
+            </ScrollReveal>
+          </div>
 
-          {/* Right Side: Text & Quick Stats */}
+          {/* Narrative Content */}
           <div className="about-content">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-100px' }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            >
-              <h4 className="about-subtitle">Who is Ankit?</h4>
-              <p className="about-text">
-                {description}
-              </p>
-              <p className="about-text">
-                Currently, I am pursuing my Bachelor of Technology in Computer Science & Engineering at <strong>Madan Mohan Malaviya University of Technology, Gorakhpur</strong>. I specialize in the MERN stack (MongoDB, Express, React, Node) and love to solve complex logic puzzles through Competitive Programming.
-              </p>
-            </motion.div>
+            <ScrollReveal direction="right">
+              <h3 className="about-subtitle">
+                Software Engineering &amp; Problem Solving
+              </h3>
 
-            {/* Quick Cards Grid */}
-            <div className="about-stats-grid">
-              {stats.map((stat, index) => (
+              <p className="about-text">
+                I am a Computer Science Engineering student at <strong>Madan Mohan Malaviya University of Technology, Gorakhpur</strong> (2023–2027) with an academic CGPA of <strong>8.37</strong>. My core interest lies in software engineering, full-stack web development, and algorithmic problem-solving.
+              </p>
+
+              <p className="about-text">
+                Through hands-on software engineering and frontend developer internships, I have worked directly on web platforms—debugging functionality, resolving UI inconsistencies across viewports, and building modular client components. I thrive on translating requirements into practical, well-engineered applications.
+              </p>
+
+              <div className="about-cta">
+                <a 
+                  href={resumeUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="btn-primary"
+                  aria-label="View Resume PDF"
+                >
+                  <ExternalLink style={{ width: '1.1rem', height: '1.1rem' }} />
+                  <span>View Resume</span>
+                </a>
+              </div>
+            </ScrollReveal>
+
+            {/* 4 Professional Highlight Cards */}
+            <div className="about-highlights-grid">
+              {highlights.map((item, index) => (
                 <GlassCard 
                   key={index}
-                  className="stat-card"
+                  className="highlight-card"
                   hoverLift={true}
                   hoverGlow={true}
                   delay={index * 0.1}
                 >
-                  <div className="stat-card-header">
-                    {stat.icon}
-                    <h5 className="stat-title">{stat.title}</h5>
+                  <div className="highlight-header">
+                    <div className="highlight-icon-box">
+                      {highlightIcons[index % highlightIcons.length]}
+                    </div>
+                    <div>
+                      <h4 className="highlight-title">{item.title}</h4>
+                      <span className="highlight-subtitle">{item.subtitle}</span>
+                    </div>
                   </div>
-                  <p className="stat-value">{stat.value}</p>
-                  <p className="stat-desc">{stat.desc}</p>
+                  <p className="highlight-desc">{item.description}</p>
                 </GlassCard>
               ))}
             </div>
-          </div>
-        </div>
-
-        {/* Education Timeline */}
-        <div className="education-timeline-container">
-          <motion.h4 
-            className="timeline-header-title"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            Education Path
-          </motion.h4>
-          
-          <div className="timeline-wrapper">
-            <div className="timeline-line" />
-            
-            <motion.div 
-              className="timeline-item"
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-80px' }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            >
-              <div className="timeline-marker">
-                <FaGraduationCap />
-              </div>
-              <GlassCard className="timeline-card" hoverLift={false} hoverGlow={true}>
-                <div className="timeline-card-header">
-                  <span className="timeline-date">{education.duration}</span>
-                  <span className="timeline-cgpa">CGPA: {education.cgpa}</span>
-                </div>
-                <h5 className="timeline-degree">{education.degree}</h5>
-                <h6 className="timeline-inst">{education.institution}</h6>
-                <p className="timeline-details">{education.details}</p>
-              </GlassCard>
-            </motion.div>
           </div>
         </div>
 
@@ -148,4 +102,5 @@ export const About = () => {
     </section>
   );
 };
+
 export default About;

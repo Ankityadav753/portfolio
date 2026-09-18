@@ -1,6 +1,19 @@
+.experience-section {
+  padding: 90px 20px;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--bg-secondary);
+}
+
+.experience-container {
+  max-width: 1040px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
 .experience-timeline {
   position: relative;
-  max-width: 1000px;
   margin: 40px auto 0 auto;
   padding: 20px 0;
 }
@@ -13,8 +26,8 @@
   left: 50%;
   width: 2px;
   background: linear-gradient(180deg, 
-    var(--accent-1) 0%, 
-    var(--accent-2) 50%, 
+    var(--accent-primary) 0%, 
+    var(--accent-highlight) 60%, 
     transparent 100%
   );
   transform: translateX(-50%);
@@ -25,7 +38,7 @@
 .exp-item {
   position: relative;
   display: flex;
-  margin-bottom: 50px;
+  margin-bottom: 45px;
   width: 100%;
 }
 
@@ -39,177 +52,210 @@
   z-index: 2;
 }
 
-/* Left Align specific styles */
+/* Left Align */
 .exp-item.left-align {
   justify-content: flex-start;
 }
 
 .exp-item.left-align .exp-content-box {
-  padding-right: 45px;
+  padding-right: 40px;
 }
 
-/* Right Align specific styles */
+/* Right Align */
 .exp-item.right-align {
   justify-content: flex-end;
 }
 
 .exp-item.right-align .exp-content-box {
-  padding-left: 45px;
+  padding-left: 40px;
 }
 
 /* Central circular marker */
 .exp-marker {
   position: absolute;
   left: 50%;
-  top: 24px;
-  width: 40px;
-  height: 40px;
+  top: 20px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-  background: var(--bg-secondary);
-  border: 2px solid var(--accent-2);
+  background: var(--bg-primary);
+  border: 2px solid var(--accent-primary);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--accent-3);
-  font-size: 1rem;
+  color: var(--accent-highlight);
   transform: translateX(-50%);
-  box-shadow: 0 0 15px rgba(139, 92, 246, 0.4);
+  box-shadow: 0 0 16px rgba(200, 117, 61, 0.35);
   z-index: 3;
 }
 
 .exp-card {
-  padding: 28px !important;
+  padding: 26px !important;
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-warm) !important;
+  border-radius: var(--border-radius-md) !important;
+  box-shadow: var(--shadow-warm) !important;
+  transition: border-color var(--transition-fast), transform var(--transition-fast), background var(--transition-fast) !important;
+}
+
+.exp-card:hover {
+  background: var(--bg-card-hover) !important;
+  border-color: var(--border-hover) !important;
+  transform: translateY(-2px) !important;
 }
 
 /* Card Inner details */
 .exp-card-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 16px;
+  align-items: flex-start;
+  margin-bottom: 12px;
   flex-wrap: wrap;
-  gap: 10px;
-}
-
-.exp-duration {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--accent-3);
-  font-family: var(--font-headings);
-  font-size: 0.9rem;
-  font-weight: 600;
-}
-
-.duration-icon {
-  font-size: 0.85rem;
-}
-
-.exp-company-tag {
-  font-family: var(--font-headings);
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--glass-border);
-  padding: 4px 12px;
-  border-radius: var(--border-radius-full);
+  gap: 12px;
 }
 
 .exp-role {
   font-family: var(--font-headings);
-  font-size: 1.35rem;
+  font-size: 1.25rem;
   font-weight: 700;
   color: var(--text-primary);
-  margin-bottom: 16px;
+  line-height: 1.25;
+}
+
+.exp-company-name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--accent-primary);
+  margin-top: 2px;
+}
+
+.exp-meta-tags {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.exp-duration,
+.exp-location {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.exp-project-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  background: rgba(200, 117, 61, 0.18);
+  border: 1px solid rgba(200, 117, 61, 0.30);
+  padding: 4px 10px;
+  border-radius: var(--border-radius-full);
+  margin-bottom: 14px;
+}
+
+.exp-project-pill strong {
+  color: var(--text-primary);
 }
 
 .exp-bullets {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin-bottom: 24px;
+  gap: 10px;
+  margin-bottom: 18px;
 }
 
 .exp-bullet-item {
   position: relative;
-  padding-left: 20px;
-  font-size: 0.92rem;
+  padding-left: 18px;
+  font-size: 0.88rem;
   color: var(--text-secondary);
   line-height: 1.6;
 }
 
 .exp-bullet-item::before {
-  content: '▹';
+  content: '▸';
   position: absolute;
   left: 0;
   top: 0;
-  color: var(--accent-2);
-  font-weight: bold;
+  color: var(--accent-highlight);
+  font-size: 0.9rem;
 }
 
-/* Tech List inside card */
+/* Tech List */
 .exp-tech {
   display: flex;
-  align-items: center;
-  gap: 12px;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-  padding-top: 16px;
+  flex-direction: column;
+  gap: 8px;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 14px;
 }
 
 .exp-tech-title {
-  font-family: var(--font-headings);
-  font-size: 0.82rem;
-  font-weight: 700;
+  font-size: 0.76rem;
+  font-weight: 600;
   text-transform: uppercase;
-  color: var(--text-primary);
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
 }
 
 .exp-tech-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 6px;
 }
 
 .exp-tech-tag {
   font-size: 0.78rem;
   font-weight: 500;
   color: var(--text-secondary);
-  background: rgba(255, 255, 255, 0.04);
-  padding: 3px 10px;
-  border-radius: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(35, 20, 13, 0.72);
+  padding: 3px 9px;
+  border-radius: var(--border-radius-full);
+  border: 1px solid var(--border-subtle);
+  transition: all var(--transition-fast);
+}
+
+.exp-tech-tag:hover {
+  border-color: var(--accent-highlight);
+  color: var(--text-primary);
+  background: rgba(50, 28, 19, 0.85);
 }
 
 /* Responsive configurations */
-@media (max-width: 800px) {
+@media (max-width: 860px) {
   .exp-line {
-    left: 20px;
+    left: 16px;
     transform: none;
   }
 
   .exp-item {
     flex-direction: column;
-    margin-bottom: 40px;
+    margin-bottom: 35px;
   }
 
   .exp-content-box {
     width: 100%;
   }
 
-  .exp-item.left-align .exp-content-box {
-    padding-right: 0;
-    padding-left: 50px;
-  }
-
+  .exp-item.left-align .exp-content-box,
   .exp-item.right-align .exp-content-box {
-    padding-left: 50px;
+    padding-left: 46px;
+    padding-right: 0;
   }
 
   .exp-marker {
-    left: 20px;
+    left: 16px;
     transform: translateX(-50%);
+  }
+
+  .exp-meta-tags {
+    align-items: flex-start;
   }
 }

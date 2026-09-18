@@ -1,13 +1,13 @@
 import React, { useRef, useState } from 'react';
-import { motion } from 'framer-motion';
 
 /**
- * MagneticButton wrapper component that uses Framer Motion's spring animations
+ * MagneticButton wrapper component that uses pure CSS transitions
  * to pull itself towards the user's cursor.
  */
 export const MagneticButton = ({ children, className = '', ...props }) => {
   const ref = useRef(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [isHovered, setIsHovered] = useState(false);
 
   const handleMouseMove = (e) => {
     if (!ref.current) return;
@@ -20,26 +20,32 @@ export const MagneticButton = ({ children, className = '', ...props }) => {
     
     // Apply dampening factor so the button moves a fraction of the distance (e.g., 30%)
     setPosition({ x: x * 0.3, y: y * 0.3 });
+    setIsHovered(true);
   };
 
   const handleMouseLeave = () => {
     setPosition({ x: 0, y: 0 });
+    setIsHovered(false);
   };
 
   const { x, y } = position;
 
   return (
-    <motion.div
+    <div
       ref={ref}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      animate={{ x, y }}
-      transition={{ type: "spring", stiffness: 180, damping: 12, mass: 0.2 }}
       className={`magnetic-button-wrapper ${className}`}
-      style={{ display: 'inline-block' }}
+      style={{ 
+        display: 'inline-block',
+        transform: `translate3d(${x}px, ${y}px, 0)`,
+        transition: isHovered ? 'none' : 'transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)'
+      }}
       {...props}
     >
       {children}
-    </motion.div>
+    </div>
   );
 };
+
+export default MagneticButton;

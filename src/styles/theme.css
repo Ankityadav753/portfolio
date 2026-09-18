@@ -1,54 +1,72 @@
 :root {
-  /* Colors */
-  --bg-primary: #0B1120;
-  --bg-secondary: #111827;
-  --accent-1: #3B82F6; /* Blue */
-  --accent-2: #8B5CF6; /* Purple */
-  --accent-3: #06B6D4; /* Cyan */
-  
-  --text-primary: #FFFFFF;
-  --text-secondary: #9CA3AF;
-  --text-muted: #4B5563;
+  /* Theme Backgrounds: Deep Espresso / Dark Chocolate Brown */
+  --bg-primary: #1E120D;
+  --bg-secondary: #281710;
+  --bg-tertiary: #321C13;
+
+  /* Dark Smoked Frosted Glass Cards */
+  --bg-card: rgba(35, 20, 13, 0.72);
+  --bg-card-hover: rgba(50, 28, 19, 0.82);
+
+  /* Cream & Warm Earthy Typography */
+  --text-primary: #FFF7EE;
+  --text-secondary: #E8D5C3;
+  --text-muted: #BDA593;
+  --text-inverse: #1E120D;
+
+  /* Warm Earthy & Mountain Accents */
+  --accent-primary: #C8753D;     /* Warm Terracotta */
+  --accent-secondary: #A85D32;   /* Deep Mountain Ochre */
+  --accent-highlight: #E49A5A;   /* Warm Sunlit Amber */
+  --accent-purple: #C8753D;      /* Obsolete fallback */
+  --accent-1: #A85D32;
+  --accent-2: #C8753D;
+  --accent-3: #E49A5A;
 
   /* Gradients */
-  --gradient-1: linear-gradient(135deg, var(--accent-1), var(--accent-2));
-  --gradient-2: linear-gradient(135deg, var(--accent-2), var(--accent-3));
-  --gradient-3: linear-gradient(135deg, var(--accent-1), var(--accent-3));
-  --gradient-rainbow: linear-gradient(135deg, var(--accent-1), var(--accent-2), var(--accent-3));
-  --gradient-dark: linear-gradient(180deg, rgba(11, 17, 32, 0.95) 0%, rgba(17, 24, 39, 0.95) 100%);
-  --gradient-text: linear-gradient(135deg, #FFFFFF 30%, #9CA3AF 100%);
-  --gradient-accent-text: linear-gradient(135deg, #60A5FA 0%, #C084FC 50%, #22D3EE 100%);
+  --gradient-1: linear-gradient(135deg, #A85D32 0%, #C8753D 50%, #E49A5A 100%);
+  --gradient-2: linear-gradient(135deg, #E49A5A 0%, #C8753D 50%, #A85D32 100%);
+  --gradient-accent-text: linear-gradient(135deg, #FFF7EE 0%, #E49A5A 50%, #C8753D 100%);
+  --gradient-rainbow: linear-gradient(135deg, #A85D32 0%, #C8753D 50%, #E49A5A 100%);
+  --gradient-border: linear-gradient(135deg, rgba(228, 154, 90, 0.28), rgba(200, 117, 61, 0.15));
 
-  /* Glassmorphism */
-  --glass-bg: rgba(17, 24, 39, 0.7);
-  --glass-bg-hover: rgba(17, 24, 39, 0.85);
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --glass-border-hover: rgba(255, 255, 255, 0.18);
+  /* Warm Borders & Dividers */
+  --border-color: rgba(255, 220, 190, 0.15);
+  --border-warm: rgba(255, 220, 190, 0.15);
+  --border-subtle: rgba(255, 220, 190, 0.10);
+  --border-focus: rgba(228, 154, 90, 0.45);
+  --border-hover: rgba(228, 154, 90, 0.28);
+
+  /* Standardized Glassmorphism & Elevation */
+  --glass-bg: rgba(35, 20, 13, 0.72);
+  --glass-bg-hover: rgba(50, 28, 19, 0.82);
+  --glass-border: rgba(255, 220, 190, 0.15);
+  --glass-border-hover: rgba(228, 154, 90, 0.28);
   --glass-blur: 16px;
-  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  --glass-shadow: 0 16px 40px rgba(10, 5, 3, 0.45);
+  --shadow-warm: 0 16px 40px rgba(10, 5, 3, 0.45);
 
-  /* Shadows & Glows */
-  --glow-accent-1: 0 0 20px rgba(59, 130, 246, 0.25);
-  --glow-accent-2: 0 0 20px rgba(139, 92, 246, 0.25);
-  --glow-accent-3: 0 0 20px rgba(6, 182, 212, 0.25);
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.15);
-  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.25);
-  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.35);
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(10, 5, 3, 0.30);
+  --shadow-md: 0 8px 24px rgba(10, 5, 3, 0.45);
+  --shadow-lg: 0 18px 45px rgba(10, 5, 3, 0.60);
+  --glow-subtle: 0 0 20px rgba(228, 154, 90, 0.15);
 
   /* Fonts */
   --font-headings: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-body: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
 
-  /* Spacing & Sizing */
-  --nav-height: 80px;
+  /* Sizing & Radius */
+  --nav-height: 72px;
   --max-width: 1200px;
   --border-radius-sm: 8px;
-  --border-radius-md: 16px;
-  --border-radius-lg: 24px;
+  --border-radius-md: 14px;
+  --border-radius-lg: 20px;
   --border-radius-full: 9999px;
 
   /* Transitions */
-  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast: 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }

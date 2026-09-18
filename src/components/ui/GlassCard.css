@@ -5,12 +5,21 @@
   padding: 28px;
   overflow: hidden;
   box-shadow: var(--glass-shadow);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
-              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: transform, box-shadow;
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.3s ease;
+  will-change: opacity, transform, box-shadow;
   z-index: 1;
+}
+
+.glass-card.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* Base Border styling using an absolute element to prevent outline clipping */
@@ -32,7 +41,7 @@
   z-index: 2;
 }
 
-/* Mouse-following glow effect */
+/* Mouse-following warm glow effect */
 .glass-card-glow {
   position: absolute;
   top: 0;
@@ -41,8 +50,8 @@
   bottom: 0;
   background: radial-gradient(
     400px circle at var(--mouse-x, -9999px) var(--mouse-y, -9999px),
-    rgba(139, 92, 246, 0.1) 0%,
-    rgba(59, 130, 246, 0.05) 50%,
+    rgba(228, 154, 90, 0.10) 0%,
+    rgba(200, 117, 61, 0.05) 50%,
     transparent 80%
   );
   pointer-events: none;
@@ -55,12 +64,16 @@
   opacity: 1;
 }
 
-.glass-card.hover-lift:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 
-              0 0 30px rgba(139, 92, 246, 0.15);
+.glass-card.is-visible.hover-lift:hover {
+  background: var(--glass-bg-hover);
+  transform: translateY(-5px);
+  box-shadow: 0 20px 45px rgba(10, 5, 3, 0.45), 
+              0 0 20px rgba(228, 154, 90, 0.10);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.3s ease;
 }
 
-.glass-card.hover-lift:hover .glass-card-border {
-  border-color: rgba(139, 92, 246, 0.35);
+.glass-card.is-visible.hover-lift:hover .glass-card-border {
+  border-color: rgba(228, 154, 90, 0.28);
 }

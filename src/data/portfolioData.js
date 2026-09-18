@@ -2,188 +2,194 @@ export const portfolioData = {
   personalInfo: {
     name: "Ankit Kumar",
     logoText: "AK",
-    title: "Software Engineer & MERN Stack Developer",
+    title: "Computer Science Engineering Student & Aspiring Software Engineer",
     titles: [
-      "Frontend Developer",
-      "React Developer",
-      "MERN Stack Developer",
-      "Competitive Programmer",
+      "Computer Science Engineering Student",
+      "Aspiring Software Engineer",
+      "Full-Stack Web Developer",
       "Problem Solver"
     ],
-    description: "A passionate Computer Science student who loves building scalable web applications and solving challenging DSA problems. Focused on creating beautiful, accessible, and high-performance user interfaces.",
-    resumeUrl: "#", // User can replace this with actual PDF link
-    email: "ankitkumar.dev.cs@gmail.com", // Realistic email based on name
-    phone: "+91 XXXXXXXXXX",
+    description:
+      "Computer Science Engineering undergraduate at Madan Mohan Malaviya University of Technology with a strong foundation in software engineering, full-stack web development, and data structures & algorithms. Passionate about building practical, high-quality applications and solving real-world problems.",
+    resumeUrl: "/resume.pdf",
+    email: "ankitanshu749@email.com",
     location: "Gorakhpur, Uttar Pradesh, India",
     socials: {
-      github: "https://github.com", // Standard links, user can customize
-      linkedin: "https://linkedin.com",
-      leetcode: "https://leetcode.com",
-      codeforces: "https://codeforces.com"
+      github: "https://github.com/Ankityadav753",
+      linkedin: "https://www.linkedin.com/in/ankit-kumar-3b84902a6/"
     }
   },
+
+  aboutHighlights: [
+    {
+      title: "Computer Science Engineering",
+      subtitle: "B.Tech Undergraduate",
+      description: "Pursuing B.Tech in CSE at Madan Mohan Malaviya University of Technology, Gorakhpur (2023–2027) with a CGPA of 8.37."
+    },
+    {
+      title: "Software Engineering Focus",
+      subtitle: "Industry Experience",
+      description: "Hands-on internship experience in debugging production platforms, resolving UI inconsistencies, and crafting modular components."
+    },
+    {
+      title: "Full-Stack Web Development",
+      subtitle: "Modern Web Stacks",
+      description: "Proficient in developing responsive client interfaces and RESTful backend architectures using React, Node.js, and modern tooling."
+    },
+    {
+      title: "Problem-Solving Foundation",
+      subtitle: "Algorithms & Core CS",
+      description: "Strong command of Data Structures & Algorithms, Object-Oriented Programming, DBMS, Operating Systems, and Computer Networks."
+    }
+  ],
+
   education: [
     {
-      degree: "B.Tech in Computer Science & Engineering",
-      institution: "Madan Mohan Malaviya University of Technology (MMMUT)",
-      location: "Gorakhpur, UP, India",
+      degree: "B.Tech in Computer Science Engineering",
+      institution: "Madan Mohan Malaviya University of Technology, Gorakhpur",
+      location: "Gorakhpur, Uttar Pradesh",
       duration: "2023 – 2027",
-      cgpa: "8.38",
-      details: "Relevant coursework includes Data Structures, Algorithms, Object-Oriented Programming, Database Management Systems, Operating Systems, and Software Engineering."
+      score: "CGPA: 8.37",
+      details: "Comprehensive coursework in core computer science disciplines including Data Structures & Algorithms, Object-Oriented Programming, Database Management Systems, Operating Systems, and Computer Networks.",
+      coursework: [
+        "Data Structures & Algorithms",
+        "Object-Oriented Programming",
+        "DBMS",
+        "Operating Systems",
+        "Computer Networks"
+      ]
+    },
+    {
+      degree: "Class XII (BSEB)",
+      institution: "GAJ College, Toryahi, Bihar",
+      location: "Bihar, India",
+      duration: "2020 – 2022",
+      score: "90.4%",
+      achievement: "District Topper in Class XII, securing 90.4%",
+      details: "Completed senior secondary education under Bihar School Examination Board (BSEB) as District Topper."
+    },
+    {
+      degree: "Class X (CBSE)",
+      institution: "Sanskar Bharti Global School",
+      location: "Delhi, India",
+      duration: "2019 – 2020",
+      score: "82.8%",
+      details: "Completed secondary education under Central Board of Secondary Education (CBSE)."
     }
   ],
+
   skills: [
     {
+      category: "Languages",
+      items: ["C++", "C", "JavaScript"]
+    },
+    {
       category: "Frontend",
-      items: [
-        { name: "HTML", level: 95 },
-        { name: "CSS", level: 90 },
-        { name: "JavaScript", level: 92 },
-        { name: "React", level: 88 },
-        { name: "Redux", level: 80 },
-        { name: "Tailwind CSS", level: 85 }
-      ]
+      items: ["HTML5", "CSS3", "React.js", "Tailwind CSS", "Redux Toolkit"]
     },
     {
-      category: "Backend & Databases",
-      items: [
-        { name: "Node.js", level: 82 },
-        { name: "Express.js", level: 80 },
-        { name: "MongoDB", level: 78 }
-      ]
+      category: "Backend",
+      items: ["Node.js", "Express.js", "REST APIs", "JWT", "Socket.io"]
     },
     {
-      category: "Programming Languages",
-      items: [
-        { name: "C++", level: 95 },
-        { name: "C", level: 85 },
-        { name: "JavaScript", level: 92 }
-      ]
+      category: "Databases",
+      items: ["MongoDB", "MySQL"]
     },
     {
-      category: "Tools & Technologies",
+      category: "Tools",
+      items: ["Git", "GitHub", "VS Code", "Postman"]
+    },
+    {
+      category: "Core Computer Science",
       items: [
-        { name: "Git", level: 88 },
-        { name: "GitHub", level: 90 },
-        { name: "VS Code", level: 92 },
-        { name: "Postman", level: 85 },
-        { name: "JWT", level: 80 }
+        "Data Structures & Algorithms",
+        "Object-Oriented Programming",
+        "DBMS",
+        "Operating Systems",
+        "Computer Networks"
       ]
     }
   ],
+
+  experience: [
+    {
+      role: "Software Engineer Intern",
+      company: "Yuga Yatra Retail OPC Pvt. Ltd.",
+      duration: "25th May to 25th July",
+      location: "Remote | Bengaluru, India",
+      project: "Rishtawaala",
+      responsibilities: [
+        "Worked on the Rishtawaala web platform by identifying, debugging, and resolving website issues to enhance stability and user experience.",
+        "Collaborated with team members to resolve UI inconsistencies, page-level errors, and feature-related problems across the platform.",
+        "Improved existing frontend functionality and responsive design across diverse viewports."
+      ],
+      technologies: ["React.js", "JavaScript", "HTML5", "CSS3", "Git", "GitHub"]
+    },
+    {
+      role: "Frontend Developer Intern",
+      company: "Dream Blend Solutions Pvt. Ltd.",
+      duration: null,
+      location: "Remote",
+      responsibilities: [
+        "Contributed to frontend web development and user interface implementation.",
+        "Developed responsive UI components ensuring clean styling, cross-browser compatibility, and seamless device navigation.",
+        "Collaborated on frontend workflows utilizing modern web development standards and modular component architecture."
+      ],
+      technologies: ["React.js", "JavaScript", "HTML5", "CSS3", "Git"]
+    }
+  ],
+
   projects: [
+    {
+      id: "tripmind-ai",
+      title: "TripMind AI",
+      tagline: "AI-Powered Travel Planning Platform",
+      isFeatured: true,
+      description:
+        "An AI-powered travel planning platform designed to generate personalized travel plans and day-by-day itineraries with destination-based intelligence, realistic travel budget calculation, and responsive travel management.",
+      features: [
+        "AI-assisted trip planning with personalized day-by-day itinerary generation",
+        "Destination-based planning supporting 35+ Indian hubs and 14 international destinations",
+        "Smart Estimated Budget Engine with category cost breakdown (Stays, Food, Transit, Activities)",
+        "Dynamic day timeline with persistent trip storage"
+      ],
+      technologies: ["React.js", "JavaScript", "Supabase", "Tailwind CSS", "AI APIs"],
+      github: "https://github.com/Ankityadav753/Trip-Mind-AI",
+      live: null
+    },
+    {
+      id: "real-time-chat",
+      title: "Real-Time Chat Application",
+      tagline: "Full-Stack Messaging Platform",
+      isFeatured: false,
+      description:
+        "A full-stack real-time chat application built with the MERN stack and Socket.io, featuring secure user authentication, instant messaging, and responsive chat room management.",
+      features: [
+        "Real-time instant messaging powered by Socket.io",
+        "Secure user authentication and protected routes implemented with JWT",
+        "One-to-one direct messaging and collaborative group chat rooms",
+        "RESTful backend APIs with MongoDB chat history storage"
+      ],
+      technologies: ["MongoDB", "Express.js", "React.js", "Node.js", "Socket.io", "JWT"],
+      github: "https://github.com/Ankityadav753/real-chat-application-",
+      live: null
+    },
     {
       id: "serenhealth",
       title: "SerenHealth",
-      subtitle: "Healthcare & Patient Management Platform",
-      description: "A comprehensive healthcare application designed to streamline medical services. Features direct search for medicines, online doctor appointment booking, rapid ambulance tracking/booking, and an integrated health-tracking BMI calculator.",
+      tagline: "Healthcare Web Platform",
+      isFeatured: false,
+      description:
+        "A 5-page responsive healthcare web application designed to streamline user access to healthcare services, medicine catalog discovery, ambulance booking, and doctor consultation.",
       features: [
-        "Medicine Search with dynamic availability filters",
-        "Doctor Appointment scheduling and slot management",
-        "Ambulance Booking simulator with real-time location visualization",
-        "BMI Calculator with personalized health recommendations"
+        "5-page responsive healthcare web interface covering essential medical services",
+        "Medicine search and healthcare service catalog discovery",
+        "Ambulance booking interface and doctor consultation directory",
+        "Clean CSS Flexbox/Grid layouts with client-side JavaScript interactions"
       ],
-      tech: ["HTML", "CSS", "JavaScript"],
-      image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=1000",
-      github: "https://github.com",
-      live: "https://example.com"
-    },
-    {
-      id: "chatapp",
-      title: "Real-Time Chat App",
-      subtitle: "Full-Featured Messaging Application",
-      description: "A real-time messaging application supporting one-to-one direct messages and group chats. Powered by Socket.io for instantaneous message delivery, protected by JWT authentication, and structured using the MERN stack.",
-      features: [
-        "Secure JSON Web Token (JWT) user authentication and authorization",
-        "Real-time messaging, typing indicators, and user online/offline status using Socket.io",
-        "Group Chat creation, customization, and member management",
-        "Responsive, modern chat UI with interactive message search"
-      ],
-      tech: ["MongoDB", "Express", "React", "Node", "Socket.io"],
-      image: "https://images.unsplash.com/photo-1611746872915-64382b5c76da?auto=format&fit=crop&q=80&w=1000",
-      github: "https://github.com",
-      live: "https://example.com"
-    }
-  ],
-  experience: [
-    {
-      role: "Frontend Developer",
-      company: "Dream Blend Solutions Pvt. Ltd.",
-      duration: "Present",
-      responsibilities: [
-        "Developing responsive and high-fidelity web applications using React and Redux.",
-        "Collaborating with UI/UX designers to translate design wireframes into pixel-perfect components.",
-        "Optimizing application components for maximum speed and scalability across diverse device viewports."
-      ],
-      technologies: ["React", "Redux", "CSS", "JavaScript", "Git"]
-    },
-    {
-      role: "Software Engineer Intern",
-      company: "Yugayatra Retail OPC Pvt. Ltd.",
-      duration: "3 Months",
-      responsibilities: [
-        "Implemented critical frontend flows and dashboard panels to improve analytics visualization.",
-        "Refactored legacy code to use modern ES6 syntax and React hooks, boosting code maintainability by 35%.",
-        "Created reusable forms, navigation components, and API integration layers using Axios."
-      ],
-      technologies: ["JavaScript", "HTML", "CSS", "React", "REST APIs", "Postman"]
-    }
-  ],
-  achievements: [
-    {
-      label: "DSA Problems Solved",
-      count: 500,
-      suffix: "+"
-    },
-    {
-      label: "LeetCode Problems",
-      count: 100,
-      suffix: "+"
-    },
-    {
-      label: "Hackathons Attended",
-      count: 3,
-      suffix: "+"
-    },
-    {
-      label: "Projects Completed",
-      count: 12,
-      suffix: "+"
-    },
-    {
-      label: "Certificates Earned",
-      count: 8,
-      suffix: "+"
-    }
-  ],
-  codingProfiles: [
-    {
-      name: "GitHub",
-      username: "ankitkumar-dev",
-      url: "https://github.com",
-      platformColor: "#171515",
-      logo: "FaGithub"
-    },
-    {
-      name: "LeetCode",
-      username: "ankit_leetcode",
-      url: "https://leetcode.com",
-      platformColor: "#FFA116",
-      logo: "SiLeetcode"
-    },
-    {
-      name: "Codeforces",
-      username: "ankit_cf",
-      url: "https://codeforces.com",
-      platformColor: "#3182CE",
-      logo: "SiCodeforces"
-    },
-    {
-      name: "LinkedIn",
-      username: "ankitkumar-linkedin",
-      url: "https://linkedin.com",
-      platformColor: "#0077B5",
-      logo: "FaLinkedin"
+      technologies: ["HTML5", "CSS3", "JavaScript"],
+      github: "https://github.com/Ankityadav753/frontend-project",
+      live: null
     }
   ]
 };

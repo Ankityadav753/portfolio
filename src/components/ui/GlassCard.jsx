@@ -1,5 +1,4 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect, useRef, useState } from 'react';
 import './GlassCard.css';
 
 export const GlassCard = ({ 
@@ -10,6 +9,32 @@ export const GlassCard = ({
   delay = 0,
   ...props 
 }) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const cardRef = useRef(null);
+
+  useEffect(() => {
+    const el = cardRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -60px 0px' }
+    );
+
+    observer.observe(el);
+
+    return () => {
+      if (el) {
+        observer.unobserve(el);
+      }
+    };
+  }, []);
+
   const handleMouseMove = (e) => {
     if (!hoverGlow) return;
     const card = e.currentTarget;
@@ -21,12 +46,10 @@ export const GlassCard = ({
   };
 
   return (
-    <motion.div
-      className={`glass-card ${hoverLift ? 'hover-lift' : ''} ${className}`}
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-60px' }}
-      transition={{ duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] }}
+    <div
+      ref={cardRef}
+      className={`glass-card ${hoverLift ? 'hover-lift' : ''} ${isVisible ? 'is-visible' : ''} ${className}`}
+      style={{ transitionDelay: `${delay}s` }}
       onMouseMove={handleMouseMove}
       {...props}
     >
@@ -35,6 +58,8 @@ export const GlassCard = ({
       <div className="glass-card-content">
         {children}
       </div>
-    </motion.div>
+    </div>
   );
 };
+
+export default GlassCard;

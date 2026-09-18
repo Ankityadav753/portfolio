@@ -1,10 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { HiMenuAlt3, HiX } from 'react-icons/hi';
-import { FaDownload } from 'react-icons/fa';
+import { Menu, X, ExternalLink } from './ui/Icons';
 import { portfolioData } from '../data/portfolioData';
 import { MagneticButton } from './ui/MagneticButton';
 import './Navbar.css';
+
+const MENU_ITEMS = [
+  { label: 'Home', target: 'home' },
+  { label: 'About', target: 'about' },
+  { label: 'Education', target: 'education' },
+  { label: 'Skills', target: 'skills' },
+  { label: 'Experience', target: 'experience' },
+  { label: 'Projects', target: 'projects' },
+  { label: 'Contact', target: 'contact' }
+];
 
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -13,148 +21,105 @@ export const Navbar = () => {
 
   const { logoText, resumeUrl } = portfolioData.personalInfo;
 
-  const menuItems = [
-    { label: 'Home', target: 'home' },
-    { label: 'About', target: 'about' },
-    { label: 'Skills', target: 'skills' },
-    { label: 'Projects', target: 'projects' },
-    { label: 'Experience', target: 'experience' },
-    { label: 'Achievements', target: 'achievements' },
-    { label: 'Profiles', target: 'coding-profiles' },
-    { label: 'Contact', target: 'contact' }
-  ];
-
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      const scrollPosition = window.scrollY;
+      setIsScrolled(scrollPosition > 40);
+
+      // Section tracking for active state
+      const sections = MENU_ITEMS.map((item) => document.getElementById(item.target));
+      const currentScroll = scrollPosition + 120; // offset for nav height
+
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const section = sections[i];
+        if (section && section.offsetTop <= currentScroll) {
+          setActiveSection(MENU_ITEMS[i].target);
+          break;
+        }
+      }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Prevent background scroll when mobile menu is open
   useEffect(() => {
-    const observerOptions = {
-      root: null,
-      rootMargin: '-40% 0px -55% 0px',
-      threshold: 0
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
     };
-
-    const observerCallback = (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActiveSection(entry.target.id);
-        }
-      });
-    };
-
-    const observer = new IntersectionObserver(observerCallback, observerOptions);
-
-    menuItems.forEach((item) => {
-      const el = document.getElementById(item.target);
-      if (el) observer.observe(el);
-    });
-
-    return () => observer.disconnect();
-  }, []);
+  }, [isMobileMenuOpen]);
 
   const handleLinkClick = (e, targetId) => {
     e.preventDefault();
     setIsMobileMenuOpen(false);
-    const targetElement = document.getElementById(targetId);
-    if (targetElement) {
-      const navHeight = 80;
-      const elementPosition = targetElement.getBoundingClientRect().top;
+
+    const el = document.getElementById(targetId);
+    if (el) {
+      const navHeight = 72;
+      const elementPosition = el.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - navHeight;
 
       window.scrollTo({
-        top: offsetPosition,
+        top: Math.max(0, offsetPosition),
         behavior: 'smooth'
       });
     }
   };
 
-  const navVariants = {
-    hidden: { y: -100, opacity: 0 },
-    visible: { 
-      y: 0, 
-      opacity: 1,
-      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] }
-    }
-  };
-
-  const menuVariants = {
-    closed: {
-      opacity: 0,
-      y: "-100%",
-      transition: {
-        duration: 0.5,
-        ease: [0.16, 1, 0.3, 1],
-        staggerChildren: 0.05,
-        staggerDirection: -1
-      }
-    },
-    open: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: [0.16, 1, 0.3, 1],
-        staggerChildren: 0.08,
-        delayChildren: 0.1
-      }
-    }
-  };
-
-  const linkVariants = {
-    closed: { opacity: 0, y: -20 },
-    open: { opacity: 1, y: 0 }
-  };
-
   return (
     <>
-      <motion.nav 
-        className={`navbar ${isScrolled ? 'scrolled' : ''}`}
-        initial="hidden"
-        animate="visible"
-        variants={navVariants}
-      >
+      <header className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
         <div className="navbar-container container">
           {/* Logo */}
-          <a href="#home" className="navbar-logo" onClick={(e) => handleLinkClick(e, 'home')}>
+          <a 
+            href="#home" 
+            className="navbar-logo" 
+            onClick={(e) => handleLinkClick(e, 'home')}
+            aria-label="Ankit Kumar Portfolio Home"
+          >
             <span className="logo-accent">&lt;</span>
             <span className="logo-text">{logoText}</span>
-            <span className="logo-accent"> /&gt;</span>
+            <span className="logo-accent">/&gt;</span>
           </a>
 
           {/* Desktop Navigation */}
-          <ul className="nav-links">
-            {menuItems.map((item) => (
-              <li key={item.target}>
-                <a 
-                  href={`#${item.target}`} 
-                  className={`nav-link ${activeSection === item.target ? 'active' : ''}`}
-                  onClick={(e) => handleLinkClick(e, item.target)}
-                >
-                  {item.label}
-                  {activeSection === item.target && (
-                    <motion.div 
-                      className="nav-link-indicator"
-                      layoutId="nav-indicator"
-                      transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-                    />
-                  )}
-                </a>
-              </li>
-            ))}
-          </ul>
+          <nav className="nav-desktop" aria-label="Main Navigation">
+            <ul className="nav-links">
+              {MENU_ITEMS.map((item) => (
+                <li key={item.target}>
+                  <a 
+                    href={`#${item.target}`} 
+                    className={`nav-link ${activeSection === item.target ? 'active' : ''}`}
+                    onClick={(e) => handleLinkClick(e, item.target)}
+                  >
+                    {item.label}
+                    {activeSection === item.target && (
+                      <span className="nav-link-indicator" aria-hidden="true" />
+                    )}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
 
-          {/* Resume Download Button */}
+          {/* Resume CTA & Mobile Hamburger */}
           <div className="nav-actions">
             <MagneticButton>
-              <a href={resumeUrl} className="btn-resume">
+              <a 
+                href={resumeUrl} 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-resume"
+                aria-label="View Ankit Kumar's Resume"
+              >
                 <span>Resume</span>
-                <FaDownload className="btn-resume-icon" />
+                <ExternalLink className="btn-resume-icon" />
               </a>
             </MagneticButton>
 
@@ -162,49 +127,51 @@ export const Navbar = () => {
             <button 
               className="mobile-menu-trigger" 
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              aria-label="Toggle menu"
+              aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+              aria-expanded={isMobileMenuOpen}
             >
-              {isMobileMenuOpen ? <HiX /> : <HiMenuAlt3 />}
+              {isMobileMenuOpen ? <X /> : <Menu />}
             </button>
           </div>
         </div>
-      </motion.nav>
+      </header>
 
       {/* Mobile Menu Overlay */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div 
-            className="mobile-overlay"
-            initial="closed"
-            animate="open"
-            exit="closed"
-            variants={menuVariants}
-          >
-            <div className="mobile-overlay-container">
-              <ul className="mobile-nav-links">
-                {menuItems.map((item) => (
-                  <motion.li key={item.target} variants={linkVariants}>
-                    <a 
-                      href={`#${item.target}`}
-                      className={`mobile-nav-link ${activeSection === item.target ? 'active' : ''}`}
-                      onClick={(e) => handleLinkClick(e, item.target)}
-                    >
-                      {item.label}
-                    </a>
-                  </motion.li>
-                ))}
-                <motion.li variants={linkVariants} className="mobile-resume-container">
-                  <a href={resumeUrl} className="btn-resume-mobile">
-                    <span>Download Resume</span>
-                    <FaDownload />
-                  </a>
-                </motion.li>
-              </ul>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <div 
+        className={`mobile-overlay ${isMobileMenuOpen ? 'open' : ''}`}
+        aria-hidden={!isMobileMenuOpen}
+      >
+        <div className="mobile-overlay-container">
+          <ul className="mobile-nav-links">
+            {MENU_ITEMS.map((item) => (
+              <li key={item.target}>
+                <a 
+                  href={`#${item.target}`}
+                  className={`mobile-nav-link ${activeSection === item.target ? 'active' : ''}`}
+                  onClick={(e) => handleLinkClick(e, item.target)}
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))}
+            <li className="mobile-resume-container">
+              <a 
+                href={resumeUrl} 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-resume-mobile"
+                onClick={() => setIsMobileMenuOpen(false)}
+                aria-label="View Ankit Kumar's Resume"
+              >
+                <span>View Resume</span>
+                <ExternalLink />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
     </>
   );
 };
+
 export default Navbar;

@@ -1,232 +1,251 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { FaGithub, FaLinkedin, FaEnvelope, FaReact, FaJsSquare, FaGitAlt } from 'react-icons/fa';
-import { SiLeetcode, SiCplusplus } from 'react-icons/si';
+import React, { useState, useEffect } from 'react';
+import { Github, Linkedin, ExternalLink, ArrowRight, Envelope } from './ui/Icons';
 import { portfolioData } from '../data/portfolioData';
 import { useTypingEffect } from '../hooks/useTypingEffect';
 import { MagneticButton } from './ui/MagneticButton';
 import './Hero.css';
 
 export const Hero = () => {
-  const { name, titles, description, socials } = portfolioData.personalInfo;
+  const { name, titles, description, socials, resumeUrl, email } = portfolioData.personalInfo;
   
-  // Custom typing hook
-  const typedText = useTypingEffect(titles, 80, 40, 2000);
+  // Dynamic background image loader with automated fallback
+  const [heroBgUrl, setHeroBgUrl] = useState('/aesthetic-nature-bg.jpg');
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.3
+  useEffect(() => {
+    let isMounted = true;
+    const primaryImg = new Image();
+    primaryImg.src = '/aesthetic-nature-bg.jpg';
+
+    primaryImg.onload = () => {
+      if (isMounted) {
+        setHeroBgUrl('/aesthetic-nature-bg.jpg');
       }
-    }
-  };
+    };
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
-    }
-  };
+    primaryImg.onerror = () => {
+      if (isMounted) {
+        setHeroBgUrl('/hero-bg.jpg');
+      }
+    };
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  // Typing effect
+  const typedText = useTypingEffect(titles, 75, 35, 2200);
 
   const handleScrollTo = (id) => {
     const el = document.getElementById(id);
     if (el) {
-      const navHeight = 80;
+      const navHeight = 72;
       const elementPosition = el.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - navHeight;
       window.scrollTo({
-        top: offsetPosition,
+        top: Math.max(0, offsetPosition),
         behavior: 'smooth'
       });
     }
   };
 
   return (
-    <section id="home" className="hero-section">
+    <section 
+      id="home" 
+      className="hero-section" 
+      aria-label="Introduction"
+      style={{ '--hero-bg-url': `url('${heroBgUrl}')` }}
+    >
       <div className="hero-container container">
         
         {/* Left Side: Content */}
-        <motion.div 
-          className="hero-content"
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          <motion.p className="hero-greeting" variants={itemVariants}>
-            Hi,
-          </motion.p>
+        <div className="hero-content">
+          <div className="hero-badge-wrapper">
+            <span className="hero-badge">
+              <span className="badge-dot" />
+              AVAILABLE FOR OPPORTUNITIES
+            </span>
+          </div>
           
-          <motion.h1 className="hero-name" variants={itemVariants}>
-            I'm <span className="name-gradient">{name}</span>
-          </motion.h1>
+          <div className="hero-title-group">
+            <span className="hero-greeting">Hi, I'm</span>
+            <h1 className="hero-name">
+              <span className="name-gradient">{name}</span>
+            </h1>
+          </div>
 
-          <motion.div className="hero-typed-container" variants={itemVariants}>
+          <h2 className="hero-headline">
+            Computer Science Engineering Student &amp; Aspiring Software Engineer
+          </h2>
+
+          <div className="hero-typed-container" aria-label={`Current role focus: ${typedText}`}>
+            <span className="hero-typed-prefix">&gt;&nbsp;</span>
             <span className="hero-typed-text">{typedText}</span>
-            <span className="hero-typed-cursor">|</span>
-          </motion.div>
+            <span className="hero-typed-cursor" aria-hidden="true">|</span>
+          </div>
 
-          <motion.p className="hero-description" variants={itemVariants}>
+          <p className="hero-description">
             {description}
-          </motion.p>
+          </p>
 
-          {/* Action Buttons */}
-          <motion.div className="hero-buttons" variants={itemVariants}>
-            <MagneticButton>
-              <button 
-                onClick={() => handleScrollTo('contact')} 
-                className="btn-primary"
-              >
-                Hire Me
-              </button>
-            </MagneticButton>
+          {/* Action CTA Buttons */}
+          <div className="hero-buttons">
             <MagneticButton>
               <button 
                 onClick={() => handleScrollTo('projects')} 
-                className="btn-secondary"
+                className="btn-primary"
+                aria-label="View Projects section"
               >
-                View Projects
+                <span>View Projects</span>
+                <ArrowRight style={{ width: '1rem', height: '1rem' }} />
               </button>
             </MagneticButton>
-          </motion.div>
 
-          {/* Social Icons */}
-          <motion.div className="hero-socials" variants={itemVariants}>
             <MagneticButton>
-              <a href={socials.github} target="_blank" rel="noreferrer" aria-label="GitHub">
-                <FaGithub />
+              <a 
+                href={resumeUrl} 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-secondary"
+                aria-label="View Ankit Kumar's Resume PDF"
+              >
+                <ExternalLink style={{ width: '1rem', height: '1rem' }} />
+                <span>View Resume</span>
               </a>
             </MagneticButton>
-            <MagneticButton>
-              <a href={socials.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn">
-                <FaLinkedin />
-              </a>
-            </MagneticButton>
-            <MagneticButton>
-              <a href={socials.leetcode} target="_blank" rel="noreferrer" aria-label="LeetCode">
-                <SiLeetcode />
-              </a>
-            </MagneticButton>
-            <MagneticButton>
-              <a href={`mailto:${portfolioData.personalInfo.email}`} aria-label="Email">
-                <FaEnvelope />
-              </a>
-            </MagneticButton>
-          </motion.div>
-        </motion.div>
 
-        {/* Right Side: IDE Mockup & Visuals */}
-        <motion.div 
-          className="hero-visual"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-        >
-          {/* Glowing background behind visual */}
+            <MagneticButton>
+              <button 
+                onClick={() => handleScrollTo('contact')} 
+                className="btn-ghost"
+                aria-label="Scroll to Contact section"
+              >
+                <span>Contact Me</span>
+              </button>
+            </MagneticButton>
+          </div>
+
+          {/* Verified Social Icons */}
+          <div className="hero-socials" aria-label="Social profiles">
+            <MagneticButton>
+              <a 
+                href={socials.github} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="GitHub Profile (opens in new tab)"
+                className="social-btn"
+              >
+                <Github />
+              </a>
+            </MagneticButton>
+
+            <MagneticButton>
+              <a 
+                href={socials.linkedin} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="LinkedIn Profile (opens in new tab)"
+                className="social-btn"
+              >
+                <Linkedin />
+              </a>
+            </MagneticButton>
+
+            <MagneticButton>
+              <a 
+                href={`mailto:${email}`} 
+                aria-label={`Send email to ${email}`}
+                className="social-btn"
+              >
+                <Envelope />
+              </a>
+            </MagneticButton>
+          </div>
+        </div>
+
+        {/* Right Side: Professional Terminal / Code Mockup */}
+        <div className="hero-visual" aria-hidden="true">
           <div className="hero-glow-back" />
 
-          {/* Code Editor Box */}
-          <div className="code-editor">
-            <div className="editor-header">
+          {/* Terminal Box */}
+          <div className="terminal-card">
+            <div className="terminal-header">
               <div className="window-dots">
-                <span className="dot red"></span>
-                <span className="dot yellow"></span>
-                <span className="dot green"></span>
+                <span className="dot red" />
+                <span className="dot yellow" />
+                <span className="dot green" />
               </div>
-              <span className="file-name">AnkitKumar.jsx</span>
+              <span className="terminal-title">ankit@developer: ~/portfolio</span>
             </div>
-            <div className="editor-body">
-              <pre>
+
+            <div className="terminal-body">
+              <div className="terminal-line">
+                <span className="prompt">$</span>
+                <span className="command">cat profile.json</span>
+              </div>
+
+              <pre className="terminal-code">
                 <code>
-                  <span className="keyword">const</span> <span className="variable">developer</span> = &#123;<br />
-                  &nbsp;&nbsp;<span className="property">name</span>: <span className="string">"Ankit Kumar"</span>,<br />
-                  &nbsp;&nbsp;<span className="property">role</span>: <span className="string">"Full Stack Developer"</span>,<br />
-                  &nbsp;&nbsp;<span className="property">skills</span>: [<br />
-                  &nbsp;&nbsp;&nbsp;&nbsp;<span className="string">"React"</span>, <span className="string">"Node"</span>, <span className="string">"Express"</span>, <br />
-                  &nbsp;&nbsp;&nbsp;&nbsp;<span className="string">"MongoDB"</span>, <span className="string">"C++"</span><br />
+                  &#123;<br />
+                  &nbsp;&nbsp;<span className="key">"name"</span>: <span className="val-str">"Ankit Kumar"</span>,<br />
+                  &nbsp;&nbsp;<span className="key">"degree"</span>: <span className="val-str">"B.Tech Computer Science"</span>,<br />
+                  &nbsp;&nbsp;<span className="key">"institution"</span>: <span className="val-str">"MMMUT Gorakhpur"</span>,<br />
+                  &nbsp;&nbsp;<span className="key">"cgpa"</span>: <span className="val-num">8.37</span>,<br />
+                  &nbsp;&nbsp;<span className="key">"coreFocus"</span>: [<br />
+                  &nbsp;&nbsp;&nbsp;&nbsp;<span className="val-str">"Software Engineering"</span>,<br />
+                  &nbsp;&nbsp;&nbsp;&nbsp;<span className="val-str">"Full-Stack Development"</span>,<br />
+                  &nbsp;&nbsp;&nbsp;&nbsp;<span className="val-str">"DSA &amp; Problem Solving"</span><br />
                   &nbsp;&nbsp;],<br />
-                  &nbsp;&nbsp;<span className="property">solvedProblems</span>: <span className="number">500</span>,<br />
-                  &nbsp;&nbsp;<span className="property">passionate</span>: <span className="boolean">true</span><br />
-                  &#125;;<br /><br />
-                  <span className="keyword">if</span> (developer.<span className="property">passionate</span>) &#123;<br />
-                  &nbsp;&nbsp;<span className="variable">console</span>.<span className="method">log</span>(<span className="string">"Keep Building! 🚀"</span>);<br />
+                  &nbsp;&nbsp;<span className="key">"primaryLanguages"</span>: [<span className="val-str">"C++"</span>, <span className="val-str">"JavaScript"</span>, <span className="val-str">"C"</span>],<br />
+                  &nbsp;&nbsp;<span className="key">"status"</span>: <span className="val-str">"Open to software engineering roles"</span><br />
                   &#125;
                 </code>
               </pre>
+
+              <div className="terminal-line status-line">
+                <span className="prompt">$</span>
+                <span className="status-text">git status</span>
+              </div>
+              <div className="status-output">
+                On branch main — Working tree clean. Ready to build.
+              </div>
             </div>
           </div>
 
-          {/* Floating Badges */}
-          <motion.div 
-            className="floating-badge badge-dsa"
-            animate={{ y: [0, -12, 0] }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-          >
-            <div className="badge-glow" />
-            <div className="badge-content">
-              <span className="badge-icon dsa-icon">📚</span>
+          {/* Clean Metric Badges (Grounded strictly in verified data, no negative-margin collision) */}
+          <div className="hero-meta-badges">
+            <div className="stat-pill">
+              <span className="pill-dot" />
               <div>
-                <p className="badge-num">500+</p>
-                <p className="badge-label">DSA Solved</p>
+                <span className="pill-title">B.Tech CSE</span>
+                <span className="pill-sub">MMMUT &bull; 8.37 CGPA</span>
               </div>
             </div>
-          </motion.div>
 
-          <motion.div 
-            className="floating-badge badge-cgp"
-            animate={{ y: [0, 12, 0] }}
-            transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
-          >
-            <div className="badge-glow" />
-            <div className="badge-content">
-              <span className="badge-icon cgp-icon">⭐</span>
+            <div className="stat-pill">
+              <span className="pill-dot" />
               <div>
-                <p className="badge-num">8.38</p>
-                <p className="badge-label">B.Tech CGPA</p>
+                <span className="pill-title">Software Engineering</span>
+                <span className="pill-sub">Internship Experience</span>
               </div>
             </div>
-          </motion.div>
-
-          {/* Floating Tech Icons */}
-          <motion.div 
-            className="floating-icon icon-react"
-            animate={{ rotate: 360 }}
-            transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-          >
-            <FaReact />
-          </motion.div>
-          
-          <motion.div 
-            className="floating-icon icon-js"
-            animate={{ y: [0, -8, 0], rotate: [0, 5, 0] }}
-            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-          >
-            <FaJsSquare />
-          </motion.div>
-
-          <motion.div 
-            className="floating-icon icon-cpp"
-            animate={{ y: [0, 8, 0], rotate: [0, -8, 0] }}
-            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-          >
-            <SiCplusplus />
-          </motion.div>
-
-          <motion.div 
-            className="floating-icon icon-git"
-            animate={{ x: [0, -6, 0], y: [0, -6, 0] }}
-            transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
-          >
-            <FaGitAlt />
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
 
       </div>
+
+      {/* Cinematic Scroll Indicator */}
+      <button 
+        onClick={() => handleScrollTo('about')} 
+        className="hero-scroll-indicator" 
+        aria-label="Scroll down to About section"
+      >
+        <span className="mouse-wheel">
+          <span className="mouse-wheel-dot" />
+        </span>
+      </button>
     </section>
   );
 };
+
 export default Hero;

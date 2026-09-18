@@ -1,19 +1,37 @@
-import React from 'react';
-import { motion, useScroll, useSpring } from 'framer-motion';
+import React, { useEffect, useState } from 'react';
 import './ScrollProgressBar.css';
 
 export const ScrollProgressBar = () => {
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001
-  });
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (totalHeight > 0) {
+        const progress = (window.scrollY / totalHeight) * 100;
+        setScrollProgress(progress);
+      } else {
+        setScrollProgress(0);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    // Initialize once
+    handleScroll();
+    
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <motion.div 
+    <div 
       className="scroll-progress-bar" 
-      style={{ scaleX }} 
+      style={{ 
+        transform: `scaleX(${scrollProgress / 100})`, 
+        transformOrigin: 'left',
+        transition: 'transform 0.1s ease-out'
+      }} 
     />
   );
 };
+
+export default ScrollProgressBar;
