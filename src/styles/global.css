@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 @import './theme.css';
 
 /* CSS Reset */
@@ -19,10 +19,17 @@ body {
   color: var(--text-primary);
   font-family: var(--font-body);
   font-size: 16px;
-  line-height: 1.6;
+  font-weight: 500;
+  line-height: 1.68;
+  letter-spacing: 0.01em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+}
+
+p {
+  font-weight: 500;
+  line-height: 1.68;
 }
 
 /* Headings */
@@ -30,6 +37,7 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-headings);
   font-weight: 700;
   line-height: 1.25;
+  letter-spacing: -0.015em;
 }
 
 /* Scrollbar Styles */
@@ -77,6 +85,12 @@ textarea:focus-visible {
   outline: 2px solid var(--accent-highlight);
   outline-offset: 2px;
 }
+/* Main Content Layer (Layer 3) */
+.main-content {
+  position: relative;
+  z-index: 3;
+  background: transparent;
+}
 
 /* Layout Utilities */
 .section {
@@ -97,8 +111,10 @@ textarea:focus-visible {
   text-align: center;
   margin-bottom: 45px;
   position: relative;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
   color: var(--text-primary);
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.45);
 }
 
 .section-title span {
@@ -108,14 +124,15 @@ textarea:focus-visible {
 }
 
 .section-subtitle {
-  font-size: 0.82rem;
+  font-size: 0.86rem;
   color: var(--accent-highlight);
   text-transform: uppercase;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.16em;
   text-align: center;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
   font-family: var(--font-headings);
   font-weight: 700;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.35);
 }
 
 /* Utility Classes */

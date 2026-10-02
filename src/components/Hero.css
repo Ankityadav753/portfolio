@@ -14,44 +14,13 @@
   padding-bottom: 60px;
   overflow: hidden;
   z-index: 1;
-  background-color: var(--bg-primary);
+  background-color: transparent;
 }
 
-/* 1. Cinematic Aesthetic Nature Night Background (Moon & Tree) */
-.hero-section::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: var(--hero-bg-url, url('/aesthetic-nature-bg.jpg'));
-  background-size: cover;
-  background-position: center right;
-  background-repeat: no-repeat;
-  opacity: 0.95;
-  filter: saturate(1.08) contrast(1.04) brightness(1.0);
-  z-index: 0;
-  pointer-events: none;
-}
-
-/* 2. Asymmetrical Dark Espresso Overlay (Left readable, Right luminous moon & tree) */
+/* 1. Cinematic Background Layer - Handled persistently at the page/app wrapper level */
+.hero-section::before,
 .hero-section::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: 
-    /* Bottom fade into dark espresso body */
-    linear-gradient(180deg, transparent 65%, rgba(30, 18, 13, 0.85) 85%, #1E120D 100%),
-    /* Top fade under translucent navbar */
-    linear-gradient(180deg, rgba(30, 18, 13, 0.65) 0%, transparent 18%),
-    /* Asymmetrical Left Scrim: Darker behind text, revealing moon and tree on the right */
-    linear-gradient(90deg, 
-      rgba(30, 18, 13, 0.96) 0%, 
-      rgba(30, 18, 13, 0.82) 28%, 
-      rgba(30, 18, 13, 0.55) 55%, 
-      rgba(30, 18, 13, 0.28) 78%, 
-      rgba(30, 18, 13, 0.18) 100%
-    );
-  z-index: 0;
-  pointer-events: none;
+  display: none !important;
 }
 
 .hero-container {
@@ -84,7 +53,7 @@
   align-items: center;
   gap: 8px;
   font-family: var(--font-headings);
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   color: var(--accent-highlight);
@@ -119,12 +88,12 @@
 .hero-greeting {
   display: block;
   font-family: var(--font-headings);
-  font-size: clamp(1.15rem, 2.2vw, 1.45rem);
+  font-size: clamp(1.2rem, 2.3vw, 1.5rem);
   font-weight: 600;
-  color: var(--text-secondary);
+  color: var(--text-primary);
   letter-spacing: -0.01em;
-  margin-bottom: 2px;
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+  margin-bottom: 4px;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.45);
 }
 
 .hero-name {
@@ -136,7 +105,7 @@
   margin: 0;
   text-transform: uppercase;
   color: var(--text-primary);
-  text-shadow: 0 4px 18px rgba(0, 0, 0, 0.65);
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.70);
 }
 
 .name-gradient {
@@ -148,12 +117,13 @@
 /* Headline */
 .hero-headline {
   font-family: var(--font-headings);
-  font-size: clamp(1.05rem, 1.8vw, 1.3rem);
-  font-weight: 600;
+  font-size: clamp(1.1rem, 1.9vw, 1.35rem);
+  font-weight: 700;
   color: var(--accent-highlight);
   line-height: 1.4;
   margin-bottom: 14px;
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+  letter-spacing: -0.01em;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.40);
 }
 
 .hero-amp {
@@ -164,14 +134,14 @@
 /* Typed dynamic roles */
 .hero-typed-container {
   font-family: var(--font-mono);
-  font-size: 1.05rem;
+  font-size: 1.08rem;
   font-weight: 600;
-  color: var(--text-secondary);
+  color: var(--text-primary);
   height: 32px;
   margin-bottom: 18px;
   display: flex;
   align-items: center;
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.40);
 }
 
 .hero-typed-prefix {
@@ -182,7 +152,7 @@
 
 .hero-typed-text {
   color: var(--accent-highlight);
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .hero-typed-cursor {
@@ -200,11 +170,13 @@
 /* Description */
 .hero-description {
   color: var(--text-secondary);
-  font-size: 1.02rem;
+  font-size: 1.05rem;
+  font-weight: 500;
   line-height: 1.75;
+  letter-spacing: 0.01em;
   max-width: 530px;
   margin-bottom: 30px;
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
 }
 
 /* Action CTA Buttons */
@@ -400,15 +372,16 @@
 
 .terminal-title {
   font-family: var(--font-mono);
-  font-size: 0.78rem;
-  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
 }
 
 .terminal-body {
   padding: 20px 22px;
   font-family: var(--font-mono);
-  font-size: 0.84rem;
-  line-height: 1.6;
+  font-size: 0.86rem;
+  line-height: 1.65;
 }
 
 .terminal-line {
@@ -425,11 +398,14 @@
 
 .command {
   color: #FFF7EE;
+  font-weight: 600;
 }
 
 .terminal-code {
   background: transparent;
   color: var(--text-secondary);
+  font-weight: 500;
+  font-size: 0.86rem;
   margin-bottom: 16px;
   white-space: pre-wrap;
   word-break: break-word;
@@ -445,12 +421,15 @@
 }
 
 .status-text {
-  color: var(--text-muted);
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 0.82rem;
 }
 
 .status-output {
-  color: #C8753D;
-  font-size: 0.78rem;
+  color: var(--accent-highlight);
+  font-size: 0.8rem;
+  font-weight: 600;
   padding-left: 16px;
 }
 
@@ -495,16 +474,17 @@
 .pill-title {
   display: block;
   font-family: var(--font-headings);
-  font-size: 0.84rem;
+  font-size: 0.88rem;
   font-weight: 700;
   color: var(--text-primary);
-  line-height: 1.2;
+  line-height: 1.25;
 }
 
 .pill-sub {
   display: block;
-  font-size: 0.72rem;
-  color: var(--text-muted);
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--text-secondary);
 }
 
 /* Scroll Indicator */
@@ -560,8 +540,9 @@
 
 .scroll-text {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.12em;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
@@ -593,19 +574,6 @@
     min-height: 100vh;
   }
 
-  .hero-section::before {
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    opacity: 0.90;
-  }
-
-  .hero-section::after {
-    background: 
-      linear-gradient(180deg, transparent 60%, rgba(30, 18, 13, 0.88) 85%, #1E120D 100%),
-      linear-gradient(180deg, rgba(30, 18, 13, 0.65) 0%, transparent 14%),
-      linear-gradient(180deg, rgba(30, 18, 13, 0.88) 0%, rgba(30, 18, 13, 0.68) 45%, rgba(30, 18, 13, 0.88) 100%);
-  }
 
   .hero-scroll-indicator {
     display: none;

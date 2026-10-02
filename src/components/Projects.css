@@ -2,7 +2,7 @@
   padding: 90px 20px;
   position: relative;
   overflow: hidden;
-  background-color: var(--bg-primary);
+  background-color: var(--bg-primary-translucent, rgba(30, 18, 13, 0.45));
 }
 
 .projects-container {
@@ -71,10 +71,10 @@
   display: inline-flex;
   align-items: center;
   font-family: var(--font-headings);
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
   color: var(--accent-highlight);
   background: rgba(200, 117, 61, 0.18);
   border: 1px solid rgba(200, 117, 61, 0.30);
@@ -83,9 +83,9 @@
 }
 
 .featured-tagline {
-  font-size: 0.88rem;
-  color: var(--text-muted);
-  font-weight: 500;
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  font-weight: 600;
 }
 
 .featured-content-grid {
@@ -97,17 +97,19 @@
 
 .featured-title {
   font-family: var(--font-headings);
-  font-size: 1.85rem;
+  font-size: 1.95rem;
   font-weight: 800;
   color: var(--text-primary);
   margin-bottom: 12px;
   letter-spacing: -0.02em;
+  line-height: 1.25;
   transition: color var(--transition-fast);
 }
 
 .featured-desc {
-  font-size: 0.95rem;
-  line-height: 1.68;
+  font-size: 0.98rem;
+  font-weight: 500;
+  line-height: 1.72;
   color: var(--text-secondary);
   margin-bottom: 20px;
 }
@@ -121,11 +123,11 @@
 }
 
 .features-subheading {
-  font-size: 0.76rem;
-  font-weight: 600;
+  font-size: 0.78rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--text-muted);
+  letter-spacing: 0.06em;
+  color: var(--text-secondary);
   margin-bottom: 10px;
 }
 
@@ -153,8 +155,9 @@
 
 .preview-window-title {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
-  color: var(--text-muted);
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--text-secondary);
 }
 
 .tripmind-dashboard {
@@ -179,18 +182,19 @@
   align-items: center;
   gap: 6px;
   font-weight: 700;
-  font-size: 0.95rem;
+  font-size: 0.98rem;
   color: #FFF7EE;
   margin-bottom: 2px;
 }
 
 .dest-params {
-  font-size: 0.75rem;
-  color: #BDA593;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--text-secondary);
 }
 
 .tripmind-status-badge {
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   color: #34d399;
   background: rgba(52, 211, 153, 0.12);
   border: 1px solid rgba(52, 211, 153, 0.3);
@@ -199,7 +203,7 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .status-live-dot {
@@ -225,15 +229,15 @@
 }
 
 .widget-label {
-  font-size: 0.72rem;
+  font-size: 0.74rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: #BDA593;
+  letter-spacing: 0.06em;
+  color: var(--text-secondary);
 }
 
 .budget-total {
-  font-size: 0.78rem;
+  font-size: 0.82rem;
   font-weight: 700;
   color: #E49A5A;
   font-family: var(--font-mono);
@@ -254,8 +258,9 @@
 .budget-bar-label {
   display: flex;
   justify-content: space-between;
-  font-size: 0.72rem;
-  color: #E8D5C3;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--text-secondary);
 }
 
 .budget-progress-track {
@@ -289,12 +294,12 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 0.75rem;
+  font-size: 0.78rem;
 }
 
 .timeline-day-pill {
   font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: 0.72rem;
   font-weight: 700;
   color: #FFF7EE;
   background: rgba(200, 117, 61, 0.25);
@@ -305,7 +310,9 @@
 }
 
 .timeline-day-desc {
-  color: #E8D5C3;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--text-secondary);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -313,8 +320,9 @@
 
 .tripmind-tag-bar {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
-  color: #BDA593;
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: var(--text-secondary);
   padding-top: 4px;
   border-top: 1px solid rgba(255, 220, 190, 0.08);
 }
@@ -360,25 +368,27 @@
 
 .project-card-title {
   font-family: var(--font-headings);
-  font-size: 1.35rem;
-  font-weight: 700;
+  font-size: 1.4rem;
+  font-weight: 800;
   color: var(--text-primary);
   line-height: 1.25;
+  letter-spacing: -0.01em;
   transition: color var(--transition-fast);
 }
 
 .project-subtitle {
   display: block;
-  font-size: 0.84rem;
-  color: var(--accent-primary);
-  font-weight: 500;
-  margin-top: 2px;
+  font-size: 0.88rem;
+  color: var(--accent-highlight);
+  font-weight: 600;
+  margin-top: 3px;
 }
 
 .project-desc {
-  font-size: 0.9rem;
+  font-size: 0.92rem;
+  font-weight: 500;
   color: var(--text-secondary);
-  line-height: 1.65;
+  line-height: 1.68;
   margin-bottom: 18px;
 }
 
@@ -392,11 +402,11 @@
 }
 
 .features-header {
-  font-size: 0.74rem;
-  font-weight: 600;
+  font-size: 0.78rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--text-muted);
+  letter-spacing: 0.06em;
+  color: var(--text-secondary);
   margin-bottom: 8px;
 }
 
@@ -427,9 +437,10 @@
 }
 
 .feature-text {
-  font-size: 0.84rem;
+  font-size: 0.88rem;
+  font-weight: 500;
   color: var(--text-secondary);
-  line-height: 1.5;
+  line-height: 1.55;
 }
 
 /* Tech Badges */
@@ -441,9 +452,9 @@
 }
 
 .tech-tag {
-  font-size: 0.76rem;
-  font-weight: 500;
-  color: var(--text-secondary);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-primary);
   background: rgba(35, 20, 13, 0.72);
   border: 1px solid var(--border-subtle);
   padding: 4px 10px;
@@ -453,7 +464,7 @@
 
 .tech-tag:hover {
   border-color: var(--accent-highlight);
-  color: var(--text-primary);
+  color: var(--accent-highlight);
   background: rgba(50, 28, 19, 0.85);
 }
 
@@ -475,8 +486,9 @@
   align-items: center;
   gap: 8px;
   font-family: var(--font-headings);
-  font-size: 0.88rem;
+  font-size: 0.9rem;
   font-weight: 600;
+  letter-spacing: 0.02em;
   padding: 9px 20px;
   border-radius: var(--border-radius-full);
   transition: all var(--transition-fast);

@@ -2,7 +2,7 @@
   padding: 90px 20px;
   position: relative;
   overflow: hidden;
-  background-color: var(--bg-primary);
+  background-color: var(--bg-primary-translucent, rgba(30, 18, 13, 0.45));
 }
 
 .about-container {
@@ -66,22 +66,26 @@
 
 .about-subtitle {
   font-family: var(--font-headings);
-  font-size: 1.35rem;
+  font-size: 1.4rem;
   font-weight: 700;
   color: var(--text-primary);
   margin-bottom: 14px;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
 }
 
 .about-text {
   color: var(--text-secondary);
-  font-size: 0.98rem;
+  font-size: 1rem;
+  font-weight: 500;
   line-height: 1.75;
-  margin-bottom: 14px;
+  letter-spacing: 0.01em;
+  margin-bottom: 16px;
 }
 
 .about-text strong {
   color: var(--text-primary);
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .about-cta {
@@ -139,22 +143,24 @@
 
 .highlight-title {
   font-family: var(--font-headings);
-  font-size: 0.94rem;
+  font-size: 1rem;
   font-weight: 700;
   color: var(--text-primary);
   line-height: 1.25;
 }
 
 .highlight-subtitle {
-  font-size: 0.76rem;
-  color: var(--text-muted);
-  font-weight: 500;
+  font-size: 0.8rem;
+  color: var(--accent-highlight);
+  font-weight: 600;
+  letter-spacing: 0.02em;
 }
 
 .highlight-desc {
-  font-size: 0.85rem;
+  font-size: 0.88rem;
+  font-weight: 500;
   color: var(--text-secondary);
-  line-height: 1.55;
+  line-height: 1.6;
 }
 
 /* Responsive adjustments */

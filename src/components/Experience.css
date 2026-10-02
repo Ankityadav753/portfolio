@@ -2,7 +2,7 @@
   padding: 90px 20px;
   position: relative;
   overflow: hidden;
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-secondary-translucent, rgba(40, 23, 16, 0.50));
 }
 
 .experience-container {
@@ -116,16 +116,17 @@
 
 .exp-role {
   font-family: var(--font-headings);
-  font-size: 1.25rem;
-  font-weight: 700;
+  font-size: 1.3rem;
+  font-weight: 800;
   color: var(--text-primary);
   line-height: 1.25;
+  letter-spacing: -0.01em;
 }
 
 .exp-company-name {
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--accent-primary);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--accent-highlight);
   margin-top: 2px;
 }
 
@@ -142,16 +143,18 @@
   align-items: center;
   gap: 6px;
   font-family: var(--font-mono);
-  font-size: 0.78rem;
-  color: var(--text-muted);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-secondary);
 }
 
 .exp-project-pill {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-size: 0.8rem;
-  color: var(--text-secondary);
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--text-primary);
   background: rgba(200, 117, 61, 0.18);
   border: 1px solid rgba(200, 117, 61, 0.30);
   padding: 4px 10px;
@@ -160,7 +163,8 @@
 }
 
 .exp-project-pill strong {
-  color: var(--text-primary);
+  color: var(--accent-highlight);
+  font-weight: 700;
 }
 
 .exp-bullets {
@@ -173,10 +177,11 @@
 
 .exp-bullet-item {
   position: relative;
-  padding-left: 18px;
-  font-size: 0.88rem;
+  padding-left: 20px;
+  font-size: 0.92rem;
+  font-weight: 500;
   color: var(--text-secondary);
-  line-height: 1.6;
+  line-height: 1.68;
 }
 
 .exp-bullet-item::before {
@@ -185,7 +190,8 @@
   left: 0;
   top: 0;
   color: var(--accent-highlight);
-  font-size: 0.9rem;
+  font-size: 0.95rem;
+  font-weight: 700;
 }
 
 /* Tech List */
@@ -198,11 +204,11 @@
 }
 
 .exp-tech-title {
-  font-size: 0.76rem;
-  font-weight: 600;
+  font-size: 0.78rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: var(--text-muted);
+  letter-spacing: 0.06em;
+  color: var(--text-secondary);
 }
 
 .exp-tech-list {
@@ -212,11 +218,11 @@
 }
 
 .exp-tech-tag {
-  font-size: 0.78rem;
-  font-weight: 500;
-  color: var(--text-secondary);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-primary);
   background: rgba(35, 20, 13, 0.72);
-  padding: 3px 9px;
+  padding: 4px 10px;
   border-radius: var(--border-radius-full);
   border: 1px solid var(--border-subtle);
   transition: all var(--transition-fast);
@@ -224,7 +230,7 @@
 
 .exp-tech-tag:hover {
   border-color: var(--accent-highlight);
-  color: var(--text-primary);
+  color: var(--accent-highlight);
   background: rgba(50, 28, 19, 0.85);
 }
 

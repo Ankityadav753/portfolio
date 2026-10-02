@@ -1,7 +1,7 @@
 .skills-section {
   padding: 90px 20px;
   position: relative;
-  background-color: var(--bg-primary);
+  background-color: var(--bg-primary-translucent, rgba(30, 18, 13, 0.45));
 }
 
 .skills-container {
@@ -63,16 +63,18 @@
 
 .category-name {
   font-family: var(--font-headings);
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   font-weight: 700;
   color: var(--text-primary);
   line-height: 1.25;
+  letter-spacing: -0.01em;
 }
 
 .category-count {
-  font-size: 0.75rem;
-  color: var(--text-muted);
+  font-size: 0.8rem;
+  color: var(--text-secondary);
   font-family: var(--font-mono);
+  font-weight: 600;
 }
 
 .skills-chips-wrapper {
@@ -83,9 +85,10 @@
 }
 
 .skill-chip {
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: var(--text-secondary);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: 0.01em;
   background: rgba(35, 20, 13, 0.72);
   border: 1px solid var(--border-subtle);
   padding: 6px 14px;
@@ -94,7 +97,7 @@
 }
 
 .skill-chip:hover {
-  color: var(--text-primary);
+  color: var(--accent-highlight);
   border-color: var(--accent-highlight);
   background: rgba(50, 28, 19, 0.85);
   transform: translateY(-1px);

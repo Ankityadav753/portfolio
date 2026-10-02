@@ -1,0 +1,90 @@
+/* ==========================================================================
+   PERSISTENT PAGE BACKGROUND STYLING
+   Layer 0: hero-bg.jpg (Persistent for entire portfolio)
+   Layer 1: Subtle dark espresso overlay
+   Layer 2: Subtle Three.js ambient particles & depth
+   Layer 3: Portfolio content (above z-index 2)
+   ========================================================================== */
+
+.developer-3d-root {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  background-color: transparent;
+}
+
+/* Layer 0: Primary Persistent Background Image (User's Exact 3D Developer Workspace) */
+.developer-3d-primary-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/hero-bg.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  opacity: 1;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Layer 1: Subtle Dark Espresso Overlay Layer (Exact requested gradient) */
+.developer-3d-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: 
+    /* Subtle top shade under navbar */
+    linear-gradient(180deg, rgba(30, 18, 13, 0.35) 0%, transparent 14%),
+    /* User's Exact Readability Scrim: Darker on left for text, transparent on center/right for workstation & skyline */
+    linear-gradient(
+      90deg,
+      rgba(30, 18, 13, 0.80) 0%,
+      rgba(30, 18, 13, 0.55) 35%,
+      rgba(30, 18, 13, 0.28) 65%,
+      rgba(30, 18, 13, 0.15) 100%
+    );
+}
+
+/* Layer 2: Subtle Interactive WebGL Canvas (Ambient constellation particles & depth) */
+.developer-3d-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+  opacity: 0;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.developer-3d-canvas.ready {
+  opacity: 0.38;
+}
+
+/* Responsive Calibration: Adjust ONLY position on mobile/tablet to center workstation */
+@media (max-width: 1024px) {
+  .developer-3d-primary-bg {
+    background-size: cover;
+    background-position: 70% center;
+  }
+}
+
+@media (max-width: 768px) {
+  .developer-3d-primary-bg {
+    background-size: cover;
+    background-position: 68% center;
+  }
+}
+
+/* Reduced Motion Override */
+@media (prefers-reduced-motion: reduce) {
+  .developer-3d-canvas {
+    transition: none !important;
+  }
+}

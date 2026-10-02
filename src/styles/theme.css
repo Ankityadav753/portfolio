@@ -3,6 +3,8 @@
   --bg-primary: #1E120D;
   --bg-secondary: #281710;
   --bg-tertiary: #321C13;
+  --bg-primary-translucent: rgba(30, 18, 13, 0.45);
+  --bg-secondary-translucent: rgba(40, 23, 16, 0.50);
 
   /* Dark Smoked Frosted Glass Cards */
   --bg-card: rgba(35, 20, 13, 0.72);

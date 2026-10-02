@@ -9,23 +9,25 @@ export const Hero = () => {
   const { name, titles, description, socials, resumeUrl, email } = portfolioData.personalInfo;
   
   // Dynamic background image loader with automated fallback
-  const [heroBgUrl, setHeroBgUrl] = useState('/aesthetic-nature-bg.jpg');
+  const [heroBgUrl, setHeroBgUrl] = useState('/hero-bg.jpg');
 
   useEffect(() => {
     let isMounted = true;
     const primaryImg = new Image();
-    primaryImg.src = '/aesthetic-nature-bg.jpg';
+    primaryImg.src = '/hero-bg.jpg';
 
     primaryImg.onload = () => {
       if (isMounted) {
-        setHeroBgUrl('/aesthetic-nature-bg.jpg');
+        setHeroBgUrl('/hero-bg.jpg');
       }
     };
 
     primaryImg.onerror = () => {
-      if (isMounted) {
-        setHeroBgUrl('/hero-bg.jpg');
-      }
+      const fallbackImg = new Image();
+      fallbackImg.src = '/aesthetic-nature-bg.jpg';
+      fallbackImg.onload = () => {
+        if (isMounted) setHeroBgUrl('/aesthetic-nature-bg.jpg');
+      };
     };
 
     return () => {

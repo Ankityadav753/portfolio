@@ -1,5 +1,5 @@
 .footer-section {
-  background-color: var(--bg-primary);
+  background-color: var(--bg-primary-translucent, rgba(30, 18, 13, 0.55));
   border-top: 1px solid var(--border-subtle);
   padding: 60px 20px 36px 20px;
   position: relative;
@@ -20,7 +20,7 @@
 
 .footer-logo {
   font-family: var(--font-headings);
-  font-size: 1.35rem;
+  font-size: 1.45rem;
   font-weight: 800;
   display: flex;
   align-items: center;
@@ -32,14 +32,15 @@
 
 .footer-desc {
   color: var(--text-secondary);
-  font-size: 0.88rem;
+  font-size: 0.92rem;
+  font-weight: 500;
   max-width: 320px;
-  line-height: 1.65;
+  line-height: 1.68;
 }
 
 .footer-title {
   font-family: var(--font-headings);
-  font-size: 0.95rem;
+  font-size: 1.02rem;
   font-weight: 700;
   color: var(--text-primary);
   margin-bottom: 18px;
@@ -55,12 +56,13 @@
 
 .footer-links a {
   color: var(--text-secondary);
-  font-size: 0.88rem;
+  font-size: 0.92rem;
+  font-weight: 600;
   transition: color var(--transition-fast);
 }
 
 .footer-links a:hover {
-  color: var(--accent-primary);
+  color: var(--accent-highlight);
 }
 
 .footer-socials {
@@ -96,19 +98,21 @@
   align-items: center;
   border-top: 1px solid var(--border-subtle);
   padding-top: 24px;
-  font-size: 0.82rem;
-  color: var(--text-muted);
+  font-size: 0.86rem;
+  font-weight: 500;
+  color: var(--text-secondary);
   flex-wrap: wrap;
   gap: 14px;
 }
 
 .text-highlight {
   color: var(--text-primary);
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .footer-author-tag {
-  color: var(--text-muted);
+  color: var(--text-secondary);
+  font-weight: 500;
 }
 
 /* Floating Back-to-Top Button */

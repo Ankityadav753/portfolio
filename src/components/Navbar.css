@@ -32,7 +32,7 @@
 /* Logo */
 .navbar-logo {
   font-family: var(--font-headings);
-  font-size: 1.4rem;
+  font-size: 1.45rem;
   font-weight: 800;
   display: flex;
   align-items: center;
@@ -67,10 +67,11 @@
 .nav-link {
   position: relative;
   font-family: var(--font-headings);
-  font-size: 0.92rem;
-  font-weight: 500;
+  font-size: 0.95rem;
+  font-weight: 600;
   color: var(--text-secondary);
   padding: 8px 4px;
+  letter-spacing: 0.01em;
   transition: color var(--transition-fast);
   display: inline-flex;
   align-items: center;
@@ -114,7 +115,8 @@
   padding: 8px 20px;
   border-radius: var(--border-radius-full);
   font-weight: 600;
-  font-size: 0.88rem;
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
   border: 1px solid rgba(255, 220, 190, 0.25);
   box-shadow: 0 4px 14px rgba(200, 117, 61, 0.35);
   transition: transform var(--transition-fast), box-shadow var(--transition-fast);
@@ -184,8 +186,9 @@
 
 .mobile-nav-link {
   font-family: var(--font-headings);
-  font-size: 1.5rem;
-  font-weight: 600;
+  font-size: 1.55rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
   color: var(--text-secondary);
   transition: color var(--transition-fast);
 }
@@ -212,8 +215,9 @@
   color: #FFF7EE;
   padding: 12px 24px;
   border-radius: var(--border-radius-full);
-  font-weight: 600;
+  font-weight: 700;
   font-size: 1rem;
+  letter-spacing: 0.02em;
   width: 100%;
   border: 1px solid rgba(255, 220, 190, 0.25);
   box-shadow: 0 4px 16px rgba(200, 117, 61, 0.35);
